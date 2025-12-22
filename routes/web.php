@@ -10,6 +10,7 @@ use App\Http\Controllers\AwardsController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeaturedProjectsController;
+use App\Http\Controllers\QuoteRequestController;
 
 // Landing page route
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
@@ -26,6 +27,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 // Form submissions
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/quote-request', [QuoteRequestController::class, 'submit'])->name('quote.request.submit');
 
 // Old welcome route (if needed)
 Route::get('/welcome', function () {
