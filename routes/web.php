@@ -17,6 +17,7 @@ Route::get('/', [LandingPageController::class, 'index'])->name('home');
 // Page routes
 Route::get('/about-us', [AboutController::class, 'index'])->name('about');
 Route::get('/products-services', [ProductsServicesController::class, 'index'])->name('products-services');
+Route::get('/products-services/quote/{productId}', [ProductsServicesController::class, 'requestQuote'])->name('products.quote-request');
 Route::get('/featured-projects', [FeaturedProjectsController::class, 'index'])->name('featured-projects');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/awards-certificates', [AwardsController::class, 'index'])->name('awards');

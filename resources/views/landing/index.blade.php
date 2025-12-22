@@ -27,8 +27,6 @@
     
     @include('landing.sections.blog-cases', ['posts' => $posts])
     
-   
-    
     <!-- @include('landing.sections.after-sales') -->
     
     @include('landing.sections.contact-form')

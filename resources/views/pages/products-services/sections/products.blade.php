@@ -19,7 +19,7 @@
                         <li>Advanced control systems</li>
                         <li>Low emissions technology</li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary">Request Quote</a>
+                    <a href="{{ route('products.quote-request', 1) }}" class="btn btn-primary">Request Quote</a>
                 </div>
             </div>
             
@@ -40,7 +40,7 @@
                         <li>Weatherproof enclosures</li>
                         <li>Remote monitoring capabilities</li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary">Request Quote</a>
+                    <a href="{{ route('products.quote-request', 2) }}" class="btn btn-primary">Request Quote</a>
                 </div>
             </div>
             
@@ -60,7 +60,7 @@
                         <li>Compact design</li>
                         <li>Quick start capability</li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary">Request Quote</a>
+                    <a href="{{ route('products.quote-request', 3) }}" class="btn btn-primary">Request Quote</a>
                 </div>
             </div>
         </div>

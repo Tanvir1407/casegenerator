@@ -171,7 +171,7 @@
 
 /* Section Header */
 .blog-header {
-    text-align: left;
+    text-align: center;
     margin-bottom: 60px;
     animation: fadeInUp 0.8s ease-out;
 }
@@ -182,7 +182,7 @@
     color: #1a202c;
     margin-bottom: 20px;
     line-height: 1.2;
-    text-align: left;
+    text-align: center;
 }
 
 .section-description {

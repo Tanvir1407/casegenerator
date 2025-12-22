@@ -119,15 +119,15 @@
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-top: 3px;
             font-family: 'Instrument Sans', sans-serif;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 11px;
         }
         
         .gps-badge-category {
-            font-size: 0.95rem;
+            font-size: 13px;
             color: #cc3366; /* Bright Blue */
             font-weight: 800;
             text-transform: uppercase;
@@ -273,12 +273,7 @@
                             <svg class="svgcorner svgcorner--2" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.91 18.38"> <g id="Capa_1-2" data-name="Capa 1"> <path class="cls-1" d="m18.91,18.38V0H0c10.27,0,18.61,8.18,18.91,18.38Z"></path> </g> </svg>
                         </div>
 
-                        <span class="gps-badge-label">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                            </svg>
-                            Hotel, Dubai
-                        </span>
+                       
                         <div class="gps-badge-category">
                             <!-- Custom Icon for Infrastructures (Bridge/Structure) -->
                             <svg class="gps-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -287,6 +282,12 @@
                             </svg>
                             INFRASTRUCTURES
                         </div>
+                         <span class="gps-badge-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            Hotel, Dubai
+                        </span>
                     </div>
                 </div>
                 <p class="gps-desc">
@@ -308,12 +309,7 @@
                             <svg class="svgcorner svgcorner--2" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.91 18.38"> <g id="Capa_1-2" data-name="Capa 1"> <path class="cls-1" d="m18.91,18.38V0H0c10.27,0,18.61,8.18,18.91,18.38Z"></path> </g> </svg>
                         </div>
 
-                       <span class="gps-badge-label">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                            </svg>
-                            Al Meydan Rd, Dubai
-                        </span>
+                       
                         <div class="gps-badge-category">
                             <!-- Custom Icon for Logistics (Warehouse/House) -->
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -325,6 +321,12 @@
 
                             LOGISTICS
                         </div>
+                        <span class="gps-badge-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            Al Meydan Rd, Dubai
+                        </span>
                     </div>
                 </div>
                 <p class="gps-desc">
@@ -342,12 +344,7 @@
                             <svg class="svgcorner" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.91 18.38"> <g id="Capa_1-2" data-name="Capa 1"> <path class="cls-1" d="m18.91,18.38V0H0c10.27,0,18.61,8.18,18.91,18.38Z"></path> </g> </svg>
                         </div>
                         
-                        <span class="gps-badge-label">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                            </svg>
-                           Mall, Dubai
-                        </span>
+                       
                         <div class="gps-badge-category">
                             <!-- Custom Icon for Industry (Factory) -->
                             <svg class="gps-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -358,6 +355,16 @@
                             </svg>
                             INDUSTRY
                         </div>
+                         <span class="gps-badge-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                              <div class="gps-badge-blend-right">
+                            <svg class="svgcorner svgcorner--2" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.91 18.38"> <g id="Capa_1-2" data-name="Capa 1"> <path class="cls-1" d="m18.91,18.38V0H0c10.27,0,18.61,8.18,18.91,18.38Z"></path> </g> </svg>
+                        </div>
+
+                           Mall, Dubai
+                        </span>
                     </div>
                 </div>
                 <p class="gps-desc">
@@ -367,7 +374,7 @@
 
         <!-- See All Button -->
         <div class="gps-btn-container">
-            <a href="#" class="gps-btn">
+            <a href="{{ route('featured-projects') }}" class="gps-btn">
                 See all Project
                 <span class="gps-btn-icon">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
