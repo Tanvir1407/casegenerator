@@ -12,32 +12,32 @@
 
         <div class="values-grid">
             <div class="value-card">
-                <div class="value-icon"><i class="fa-solid fa-gears"></i></div>
+                <div class="service-icon"><i class="fa-solid fa-gears"></i></div>
                 <h3 class="value-title">Advanced & Reliable Products</h3>
                 <p class="value-text">We are confident in meeting your requirements and serving government, semi-government, and leading contracting companies across the UAE.</p>
             </div>
             <div class="value-card">
-                <div class="value-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
                 <h3 class="value-title">Energy Optimization</h3>
                 <p class="value-text">CASABLANCA offers competitive maintenance contracts with original spare parts, both within and beyond warranty.</p>
             </div>
             <div class="value-card">
-                <div class="value-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="service-icon"><i class="fa-solid fa-users"></i></div>
                 <h3 class="value-title">Dedicated Technical Support Team</h3>
                 <p class="value-text">Our expert technicians provide fast, reliable support to ensure uninterrupted performance.</p>
             </div>
             <div class="value-card">
-                <div class="value-icon"><i class="fa-solid fa-chart-bar"></i></div>
+                <div class="service-icon"><i class="fa-solid fa-chart-bar"></i></div>
                 <h3 class="value-title">Analytics Engineering</h3>
                 <p class="value-text">CASABLANCA provides 24/7 technical support across the UAE and conducts training seminars to enhance customer knowledge</p>
             </div>
             <div class="value-card">
-                <div class="value-icon"><i class="fa-solid fa-wrench"></i></div>
+                <div class="service-icon"><i class="fa-solid fa-wrench"></i></div>
                 <h3 class="value-title">After Sale Support Service</h3>
                 <p class="value-text">Reliable after-sales support ensuring smooth operation and long-term performance.</p>
             </div>
             <div class="value-card">
-                <div class="value-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+                <div class="service-icon"><i class="fa-solid fa-arrows-spin"></i></div>
                 <h3 class="value-title">Analytics Optimization</h3>
                 <p class="value-text">CASABLANCA is well known for its after sales services by offering up to Two year warranty and highly trained maintenance team 24 hours 7 days a week.</p>
             </div>
@@ -148,25 +148,15 @@
     transform: translateY(-10px);
 }
 
-.value-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #C33162, #a0264c);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    color: white;
+/* Ensure icons are centered in the card */
+.values-section .service-icon {
     margin: 0 auto 25px;
-    border: 3px solid white;
-    transition: all 0.3s ease;
 }
 
-.value-card:hover .value-icon {
-    transform: scale(1.1);
-    background: linear-gradient(135deg, rgba(195, 49, 98, 0.6), rgba(160, 38, 76, 0.6));
-    opacity: 0.7;
+.value-card:hover .service-icon {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: rotate(10deg);
 }
 
 .value-title {
@@ -229,7 +219,7 @@
         font-size: 1rem;
     }
 
-    .value-icon {
+    .values-section .service-icon {
         width: 60px;
         height: 60px;
         font-size: 24px;
