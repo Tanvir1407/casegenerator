@@ -1377,7 +1377,104 @@
 .map-container {
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: none; /* remove map shadow globally */
+}
+
+/* Contact Two Column Section (Contact Page) */
+.page-contact .contact-two-column-section {
+    padding: 80px 0;
+    background: var(--white);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: stretch; /* ensure equal column heights */
+}
+
+.contact-form-card,
+.contact-map-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: none; /* remove any card shadows */
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-map-card .map-container {
+    height: 100%;
+    min-height: 420px;
+    box-shadow: none;
+    flex: 1;
+}
+
+.contact-form-light {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: transparent;
+    border: none;
+    box-shadow: none; /* ensure no form shadow */
+    flex: 1;
+}
+
+.contact-form-light .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.contact-form-light .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-form-light .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.contact-form-light label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.contact-form-light input,
+.contact-form-light textarea {
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form-light input:focus,
+.contact-form-light textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(204, 51, 102, 0.12);
+}
+
+.contact-form-light button.btn.btn-primary {
+    align-self: flex-start;
+    padding: 12px 28px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+/* Responsive adjustments for contact grid */
+@media (max-width: 1024px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    .contact-form-light .form-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Responsive Design */
