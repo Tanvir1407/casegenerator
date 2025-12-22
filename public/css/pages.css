@@ -190,9 +190,9 @@
     transition: transform 0.3s;
 }
 
-.value-card:hover {
+/* .value-card:hover {
     transform: translateY(-5px);
-}
+} */
 
 .value-icon {
     font-size: 48px;
