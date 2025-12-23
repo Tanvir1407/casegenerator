@@ -30,7 +30,7 @@ class AjitPanelProvider extends PanelProvider
             ->login()
             ->brandName('Casagenerators')
             ->colors([
-                'primary' => Color::rgb(217, 77, 128),
+                'primary' => Color::rgb(176, 42, 89),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

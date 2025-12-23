@@ -13,7 +13,7 @@
     
     @include('pages.awards.sections.hero')
     
-    <!-- @include('pages.awards.sections.awards') -->
+  
     
     @include('pages.awards.sections.certifications')
     
