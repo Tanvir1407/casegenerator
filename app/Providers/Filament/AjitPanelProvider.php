@@ -28,6 +28,7 @@ class AjitPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Casagenerators')
             ->colors([
                 'primary' => Color::Amber,
             ])
