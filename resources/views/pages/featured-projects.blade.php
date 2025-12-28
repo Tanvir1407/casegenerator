@@ -235,7 +235,7 @@
             <!-- Section Header -->
             <div class="ap-header">
                 <span class="ap-subtitle">All Projects</span>
-                <h1 class="ap-title">Our Featured <span style="color: #cc3366;">Projects</span></h1>
+                <h1 class="ap-title">Our Featured <span style="color: var(--primary-color);">Projects</span></h1>
             </div>
 
             <div class="ap-grid">
