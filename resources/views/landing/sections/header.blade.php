@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="navbar">
             <a href="/" class="logo">
-                <span class="logo-text"><span class="logo-primary">Casa </span>Generators</span>
+                <img src="{{ asset('images/Logo/Casagenerators Logo.png') }}" alt="Casagenerators Logo" class="logo-image">
             </a>
             <ul class="nav-menu">
                 <li><a href="{{ route('about') }}">About Us</a></li>
