@@ -16,7 +16,7 @@
             flex-basis: 50%;
             min-width: 320px;
             /* Gradient based on #CC3366 */
-            background: linear-gradient(135deg, #CC3366 0%, #991f48 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
             color: #ffffff;
             display: flex;
             flex-direction: column;

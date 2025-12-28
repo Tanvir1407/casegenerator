@@ -26,7 +26,7 @@
         }
         
         .main-header .logo-primary {
-            color: #cc3366 !important;
+            color: var(--primary-color) !important;
         }
         
         .main-header .nav-menu a {
@@ -148,7 +148,7 @@
 
             .ap-badge-label {
                 font-size: 13px;
-                color: #cc3366;
+                color: var(--primary-color);
                 font-weight: 700;
                 letter-spacing: 0.05em;
                 text-transform: uppercase;
@@ -161,7 +161,7 @@
 
             .ap-badge-category {
                 font-size: 13px;
-                color: #cc3366;
+                color: var(--primary-color);
                 font-weight: 800;
                 text-transform: uppercase;
                 display: flex;
@@ -174,7 +174,7 @@
                 width: 24px;
                 height: 24px;
                 stroke-width: 1.5;
-                color: #cc3366;
+                color: var(--primary-color);
             }
 
             .ap-badge-icon.fill-icon {
@@ -201,7 +201,7 @@
 
             .ap-subtitle {
                 display: inline-block;
-                color: #cc3366;
+                color: var(--primary-color);
                 font-size: 13px;
                 font-weight: 700;
                 text-transform: uppercase;

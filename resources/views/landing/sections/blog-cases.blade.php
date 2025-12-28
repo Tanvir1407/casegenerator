@@ -284,7 +284,7 @@
     align-items: center;
     gap: 10px;
     padding: 14px 36px;
-    background: #cc3366;
+    background: var(--primary-color);
     color: white;
     border-radius: 6px;
     font-size: 15px;
@@ -294,7 +294,7 @@
 }
 
 .btn-view-all:hover {
-    background: #b02954;
+    background: var(--primary-hover);
     gap: 14px;
 }
 

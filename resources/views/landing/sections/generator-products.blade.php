@@ -115,7 +115,7 @@
 
         .gps-badge-label {
             font-size: 13px;
-            color: #cc3366;
+            color: var(--primary-color);
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
@@ -128,7 +128,7 @@
         
         .gps-badge-category {
             font-size: 13px;
-            color: #cc3366; /* Bright Blue */
+            color: var(--primary-color); /* Bright Blue */
             font-weight: 800;
             text-transform: uppercase;
             display: flex;
@@ -141,7 +141,7 @@
             width: 24px;
             height: 24px;
             stroke-width: 1.5;
-            color: #cc3366;
+            color: var(--primary-color);
         }
         
         /* Icon styles specific to fill vs stroke if needed */
@@ -169,7 +169,7 @@
 
         .gps-subtitle {
             display: inline-block;
-            color: #cc3366;
+            color: var(--primary-color);
             font-size: 16px;
             font-weight: 600;
             text-transform: uppercase;
@@ -210,7 +210,7 @@
             align-items: center;
             margin-top: 50px;
             justify-content: center;
-            background-color: #cc3366;
+            background-color: var(--primary-color);
             color: #ffffff;
             font-size: 1.05rem;
             font-weight: 700;
@@ -223,7 +223,7 @@
         }
 
         .gps-btn:hover {
-            background-color: #b32655;
+            background-color: var(--primary-hover);
             transform: translateY(-3px);
             /* box-shadow: 0 8px 25px rgba(204, 51, 102, 0.45); */
         }

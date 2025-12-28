@@ -310,7 +310,7 @@ body {
 }
 
 .btn-hero-primary {
-    background: #cc3366;
+    background: var(--primary-color);
     color: white;
     padding: 14px 36px;
     border-radius: 50px;
@@ -325,12 +325,12 @@ body {
 }
 
 .btn-hero-primary:hover {
-    background: #cc3366;
+    background:var(--primary-hover);
     transform: translateY(-3px);
 }
 
 .btn-hero-primary:hover {
-    background: #b02954;
+    background: var(--primary-hover);
     transform: translateY(-2px);
 }
 
@@ -360,8 +360,8 @@ body {
 }
 
 .hero-nav:hover {
-    background: rgba(204, 51, 102, 0.9);
-    border-color: #cc3366;
+    background: var(--primary-hover);
+    border-color: var(--primary-color);
     transform: translateY(-50%) scale(1.1);
 }
 
@@ -400,7 +400,7 @@ body {
 }
 
 .indicator.active {
-    background: #cc3366;
+    background: var(--primary-color);
     transform: scale(1.2);
     width: 30px;
     border-radius: 10px;
@@ -1442,7 +1442,7 @@ body {
 
 /* Featured Projects Page Styles */
 .featured-projects-hero {
-    background-color: #cc3366;
+    background-color: var(--primary-color);
     padding: 80px 0 60px;
     color: var(--white);
     position: relative;

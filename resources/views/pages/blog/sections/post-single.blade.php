@@ -746,7 +746,7 @@
                 }
 
                 .related-post-title a:hover {
-                    color: #cc3366;
+                    color: var(--primary-color);
                 }
 
                 .related-post-excerpt {
@@ -759,7 +759,7 @@
 
                 .read-more-link {
                     display: inline-block;
-                    color: #e74c8c;
+                    color: var(--primary-color);
                     font-weight: 600;
                     font-size: 0.95rem;
                     text-decoration: none;
@@ -768,7 +768,7 @@
                 }
 
                 .read-more-link:hover {
-                    color: #d63878;
+                    color: var(--primary-hover);
                     transform: translateX(4px);
                 }
 

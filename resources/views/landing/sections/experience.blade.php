@@ -127,7 +127,7 @@
     left: -15px;
     width: 100%;
     height: 100%;
-    background: #CC3366;
+    background: var(--primary-color);
     border-radius: 40px;
     z-index: -1;
     transform: rotate(-3deg);
@@ -226,7 +226,7 @@
     position: absolute;
     bottom: -77px; /* Overlapping bottom */
     right: -45px; /* Overlapping right */
-    background: #CC3366; 
+    background: var(--primary-color); 
     padding: 30px;
     border-radius: 27px;
     width: 200px; /* Approximate width */
@@ -282,7 +282,7 @@
 
 .section-subtitle {
     display: inline-block;
-    color: #cc3366;
+    color: var(--primary-color);
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
@@ -305,7 +305,7 @@
 }
 
 .highlight-text {
-    color: #cc3366;
+    color: var(--primary-color);
     position: relative;
     display: inline-block;
 }
@@ -371,16 +371,16 @@
     left: 0;
     width: 0;
     height: 3px;
-    background: #cc3366;
+    background: var(--primary-color);
     transition: width 0.3s ease;
 }
 
 .tab-btn:hover {
-    color: #cc3366;
+    color: var(--primary-color);
 }
 
 .tab-btn.active {
-    color: #cc3366;
+    color: var(--primary-color);
 }
 
 .tab-btn.active:after {

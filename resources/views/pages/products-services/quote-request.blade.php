@@ -92,7 +92,7 @@
 
         .product-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #CC3366 0%, #992147 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
             color: white;
             padding: 8px 16px;
             border-radius: 25px;
@@ -140,7 +140,7 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: #CC3366;
+            color: var(--primary-color);
             font-weight: bold;
             font-size: 18px;
         }
@@ -189,7 +189,7 @@
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #CC3366;
+            border-color: var(--primary-color);
             background-color: white;
         }
 
@@ -205,7 +205,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #CC3366 0%, #992147 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
             color: white;
             padding: 14px 30px;
             border: none;
@@ -231,7 +231,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: #CC3366;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
             margin-bottom: 30px;
@@ -240,7 +240,7 @@
 
         .back-link:hover {
             gap: 12px;
-            color: #CC3366;
+            color: var(--primary-hover);
         }
 
         .required {
