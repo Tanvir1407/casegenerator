@@ -27,7 +27,7 @@ Route::get('/projects', [ProjectController::class, 'index'])->name('projects.ind
 Route::get('/projects/{project:slug}', [ProjectController::class, 'show'])->name('projects.show');
 
 // API route for featured projects
-Route::get('/api/featured-projects', [ProjectController::class, 'featured'])->name('api.featured-projects');
+// Route::get('/api/featured-projects', [ProjectController::class, 'featured'])->name('api.featured-projects');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/awards-certificates', [AwardsController::class, 'index'])->name('awards');

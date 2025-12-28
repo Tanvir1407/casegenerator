@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\ImageService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,13 +28,56 @@ class Post extends Model
     ];
 
     /**
+     * Clean up image files when post is deleted
+     */
+    protected static function booted()
+    {
+        parent::booted();
+        
+        static::deleting(function ($post) {
+            $disk = Storage::disk('public');
+            
+            // Delete featured image
+            if ($post->featured_image && $disk->exists($post->featured_image)) {
+                $disk->delete($post->featured_image);
+            }
+            
+            // Delete gallery images
+            if ($post->gallery_images && is_array($post->gallery_images)) {
+                foreach ($post->gallery_images as $image) {
+                    if ($disk->exists($image)) {
+                        $disk->delete($image);
+                    }
+                }
+            }
+            
+            // Delete content images
+            if ($post->content_images && is_array($post->content_images)) {
+                foreach ($post->content_images as $image) {
+                    if ($disk->exists($image)) {
+                        $disk->delete($image);
+                    }
+                }
+            }
+        });
+    }
+
+    /**
      * Get the featured image URL
      */
     protected function featuredImageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->featured_image ? Storage::url($this->featured_image) : null,
+            get: fn () => app(ImageService::class)->url($this->featured_image)
         );
+    }
+
+    /**
+     * Check if featured image exists in storage
+     */
+    public function hasFeaturedImage(): bool
+    {
+        return app(ImageService::class)->exists($this->featured_image);
     }
 
     /**

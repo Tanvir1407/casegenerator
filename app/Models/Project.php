@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\ImageService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -50,8 +51,26 @@ class Project extends Model
     protected function featuredImageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->featured_image ? Storage::url($this->featured_image) : null,
+            get: fn () => app(ImageService::class)->url($this->featured_image)
         );
+    }
+    
+    /**
+     * Get the featured image path for storage operations
+     */
+    protected function featuredImagePath(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->featured_image ? storage_path('app/public/' . $this->featured_image) : null,
+        );
+    }
+    
+    /**
+     * Check if featured image exists in storage
+     */
+    public function hasFeaturedImage(): bool
+    {
+        return app(ImageService::class)->exists($this->featured_image);
     }
 
     /**
@@ -76,6 +95,21 @@ class Project extends Model
     public function scopePublishedAndFeatured($query)
     {
         return $query->published()->featured();
+    }
+
+    /**
+     * Delete associated image files when project is deleted
+     */
+    protected static function booted()
+    {
+        parent::booted();
+        
+        static::deleting(function ($project) {
+            // Delete featured image if it exists
+            if ($project->featured_image && Storage::disk('public')->exists($project->featured_image)) {
+                Storage::disk('public')->delete($project->featured_image);
+            }
+        });
     }
 
     /**

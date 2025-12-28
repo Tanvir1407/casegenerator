@@ -71,13 +71,19 @@ class ProjectResource extends Resource
                     ->directory('projects/featured')
                     ->visibility('public')
                     ->maxSize(5120)
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
                     ->imageEditor()
                     ->imageEditorAspectRatios([
                         '16:9',
                         '4:3',
                         '1:1',
                     ])
-                    ->columnSpanFull(),
+                    ->imageResizeMode('cover')
+                    ->imageCropAspectRatio('16:9')
+                    ->imageResizeTargetWidth(1200)
+                    ->imageResizeTargetHeight(675)
+                    ->columnSpanFull()
+                    ->helperText('Upload a high-quality image (recommended: 1200x675px, 16:9 ratio). Supported formats: JPEG, PNG, GIF, WebP.'),
 
                 TextInput::make('image_alt_text')
                     ->label('Alt Text for Featured Image')
@@ -108,7 +114,10 @@ class ProjectResource extends Resource
                     ->label('Image')
                     ->disk('public')
                     ->size(60)
-                    ->square(),
+                    ->square()
+                    ->defaultImageUrl('/images/placeholder.png')
+                    ->extraImgAttributes(['loading' => 'lazy'])
+                    ->checkFileExistence(false),
 
                 TextColumn::make('title')
                     ->searchable()

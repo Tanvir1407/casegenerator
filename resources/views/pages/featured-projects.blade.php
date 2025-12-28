@@ -242,7 +242,11 @@
                 @foreach($projects as $project)
                 <div class="ap-card">
                     <div class="ap-image-wrapper">
-                        <img src="{{ asset('images/' . $project['image']) }}" alt="{{ $project['title'] }}" class="ap-image">
+                        @if($project->featured_image && $project->featured_image_url)
+                            <img src="{{ $project->featured_image_url }}" alt="{{ $project->image_alt_text ?? $project->title }}" class="ap-image">
+                        @else
+                            <img src="{{ asset('images/placeholder.png') }}" alt="{{ $project->title }}" class="ap-image">
+                        @endif
                         
                         <!-- Badge -->
                         <div class="ap-badge">
@@ -270,18 +274,18 @@
                                     <path d="M1 12h6m6 0h6"></path>
                                     <path d="M4.22 19.78l4.24-4.24m2.12-2.12l4.24-4.24"></path>
                                 </svg>
-                                {{ $project['type'] }}
+                                {{ $project->status ?? 'Project' }}
                             </div>
                             <span class="ap-badge-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                 </svg>
-                                {{ $project['location'] }}
+                                {{ $project->location ?? 'Location not specified' }}
                             </span>
                         </div>
                     </div>
                     <p class="ap-desc">
-                        {{ $project['title'] }}
+                        {{ $project->title }}
                     </p>
                 </div>
                 @endforeach

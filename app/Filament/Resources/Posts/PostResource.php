@@ -55,13 +55,19 @@ class PostResource extends Resource
                 ->directory('posts/featured')
                 ->visibility('public')
                 ->maxSize(5120)
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
                 ->imageEditor()
                 ->imageEditorAspectRatios([
                     '16:9',
                     '4:3',
                     '1:1',
                 ])
-                ->columnSpanFull(),
+                ->imageResizeMode('cover')
+                ->imageCropAspectRatio('16:9')
+                ->imageResizeTargetWidth(1200)
+                ->imageResizeTargetHeight(675)
+                ->columnSpanFull()
+                ->helperText('Upload a high-quality featured image (recommended: 1200x675px, 16:9 ratio)'),
 
             TextInput::make('image_alt_text')
                 ->label('Alt Text for Featured Image')
@@ -76,18 +82,28 @@ class PostResource extends Resource
                 ->directory('posts/gallery')
                 ->visibility('public')
                 ->maxFiles(10)
+                ->maxSize(5120)
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
+                ->imageResizeMode('cover')
+                ->imageResizeTargetWidth(800)
+                ->imageResizeTargetHeight(600)
                 ->reorderable()
-                ->columnSpanFull(),
+                ->columnSpanFull()
+                ->helperText('Upload multiple images for the gallery (max 10 images, 5MB each)'),
 
             FileUpload::make('content_images')
                 ->label('Content Images')
-                ->helperText('These images can be inserted into your content using the rich editor.')
+                ->helperText('Upload images that can be inserted into your content using the rich editor.')
                 ->image()
                 ->disk('public')
                 ->multiple()
                 ->directory('posts/content')
                 ->visibility('public')
                 ->maxFiles(20)
+                ->maxSize(5120)
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
+                ->imageResizeMode('cover')
+                ->imageResizeTargetWidth(1000)
                 ->reorderable()
                 ->columnSpanFull(),
         ]);
@@ -100,8 +116,11 @@ class PostResource extends Resource
             ->columns([
                 ImageColumn::make('featured_image')
                     ->label('Image')
+                    ->disk('public')
                     ->size(60)
-                    ->defaultImageUrl(asset('images/placeholder.png')),
+                    ->defaultImageUrl('/images/placeholder.png')
+                    ->extraImgAttributes(['loading' => 'lazy'])
+                    ->checkFileExistence(false),
 
                 TextColumn::make('title')
                     ->searchable()
