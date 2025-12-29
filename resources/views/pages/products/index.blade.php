@@ -11,20 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    @include('landing.sections.header')
     
-    <section class="hero-banner">
-        <div class="container">
-            <h1 class="hero-title">Our Products</h1>
-            <p class="hero-subtitle">Comprehensive Generator Solutions for Every Need</p>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Products</li>
-                </ol>
-            </nav>
-        </div>
-    </section>
+    
+  
 <section class="products-listing">
     <div class="container">
         @if($products->isEmpty())
@@ -94,7 +83,7 @@
     </div>
 </section>
 
-    @include('landing.sections.footer')
+ 
     
     <style>
 <style>
@@ -117,7 +106,7 @@
 }
 
 .breadcrumb {
-    background: rgba(255, 255, 255, 0.1);
+    
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
     margin: 0;
@@ -160,12 +149,14 @@
     position: relative;
     height: 250px;
     overflow: hidden;
+    border-radius: 1rem 1rem 0 0;
 }
 
 .product-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 1rem 1rem 0 0;
 }
 
 .placeholder-image {
@@ -307,6 +298,6 @@
 }
 </style>
 
-@include('landing.sections.footer')
+
 </body>
 </html>

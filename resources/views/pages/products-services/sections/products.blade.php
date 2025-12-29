@@ -1,302 +1,285 @@
-<section class="products-showcase-section">
-    <div class="container">
-        <h2 class="section-title text-center">Providing Innovative & Sustainable Solutions</h2>
+<section class="products-listing">
+    <h2 class="section-title text-center">Providing Innovative & Sustainable Solutions</h2>
         <p class="section-subtitle text-center">Building The Future, Restoring The Past</p>
-        
-        @if($featuredProducts && $featuredProducts->count() > 0)
-            <div class="products-grid-modern">
-                @foreach($featuredProducts as $index => $product)
-                    <div class="generator-card">
-                        <div class="card-image-section">
-                            <div class="generator-card-header">
-                                <span class="emergency-balance-badge">EMERGENCY BALANCE</span>
-                            </div>
-                            
-                            <div class="generator-image">
-                                @if($product->featured_image)
-                                    <img src="{{ $product->featured_image_url }}" 
-                                         alt="{{ $product->image_alt_text ?: $product->title }}">
-                                @else
-                                    <img src="{{ asset('images/Product_Services/1-4-1-1.png') }}" 
-                                         alt="{{ $product->title }}">
-                                @endif
-                            </div>
-                            
-                            <div class="card-badges">
-                                <span class="freq-badge">50HZ</span>
-                                <span class="phase-badge">3 PHASES</span>
-                            </div>
-                        </div>
-                        
-                        <div class="card-specs-section">
-                            <h3 class="generator-model">{{ $product->title }}</h3>
-                            
-                            <div class="specs-content">
-                                <div class="spec-group">
-                                    <div class="spec-row">
-                                        <span class="spec-label">⚡ POWER:</span>
-                                        <div class="power-specs">
-                                            @if($product->features && count($product->features) > 0)
-                                                @foreach($product->features as $index => $feature)
-                                                    @if($index < 3 && isset($feature['feature']) && $feature['feature'])
-                                                        <span class="power-line">{{ $feature['feature'] }}</span>
-                                                    @endif
-                                                @endforeach
-                                            @else
-                                                <span class="power-line">PRP: 600 kVA (480 kW)</span>
-                                                <span class="power-line">ESP: 657 kVA (526 kW)</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="specs-row-inline">
-                                    <div class="spec-group">
-                                        <span class="spec-label">⚡ VOLTAGE:</span>
-                                        <span class="spec-value">400/230V</span>
-                                    </div>
-                                    
-                                    <div class="spec-group">
-                                        <span class="spec-label">🏭 EMISSIONS:</span>
-                                        <span class="spec-value">EU Stage II</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="generator-actions">
-                                @if($product->hasPdfFile())
-                                    <a href="{{ route('products.download-pdf', $product) }}" class="download-btn" title="{{ $product->pdf_title ?: 'Download PDF' }}">
-                                        <i class="fas fa-download"></i>
-                                        Download data sheet
-                                    </a>
-                                @else
-                                    <a href="{{ route('products.show', $product) }}" class="download-btn">
-                                        <i class="fas fa-download"></i>
-                                        Download data sheet
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+    <div class="container">
+        @if($products->isEmpty())
+            <div class="text-center py-5">
+                <h3>No products available at the moment</h3>
+                <p class="text-muted">Please check back later for our latest product offerings.</p>
+                <a href="{{ route('contact') }}" class="btn btn-primary">Contact Us for Information</a>
             </div>
         @else
-            {{-- Fallback to static content with new design --}}
-            <div class="products-grid-modern">
-                <div class="generator-card">
-                    <div class="card-image-section">
-                        <div class="generator-card-header">
-                            <span class="emergency-balance-badge">EMERGENCY BALANCE</span>
-                        </div>
+            <div class="products-grid">
+                @foreach($products as $product)
+                <article class="product-card">
+                    <div class="product-image">
+                        @if($product->featured_image)
+                            <img src="{{ $product->featured_image_url }}" 
+                                 alt="{{ $product->image_alt_text ?: $product->title }}" 
+                                 loading="lazy">
+                        @else
+                            <div class="placeholder-image">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                        @endif
                         
-                        <div class="generator-image">
-                            <img src="{{ asset('images/Product_Services/1-4-1-1.png') }}" alt="BGV 650 ST Generator">
-                        </div>
+                        @if($product->is_featured)
+                            <span class="featured-badge">Featured</span>
+                        @endif
                         
-                        <div class="card-badges">
-                            <span class="freq-badge">50HZ</span>
-                            <span class="phase-badge">3 PHASES</span>
-                        </div>
+                        @if($product->category)
+                            <span class="category-badge">{{ $product->category }}</span>
+                        @endif
                     </div>
                     
-                    <div class="card-specs-section">
-                        <h3 class="generator-model">BGV 650 ST</h3>
+                    <div class="product-content">
+                        <h3 class="product-title">
+                            <a href="{{ route('products.show', $product) }}">{{ $product->title }}</a>
+                        </h3>
                         
-                        <div class="specs-content">
-                            <div class="spec-group">
-                                <div class="spec-row">
-                                    <span class="spec-label">⚡ POWER:</span>
-                                    <div class="power-specs">
-                                        <span class="power-line">PRP: 600 kVA (480 kW)</span>
-                                        <span class="power-line">ESP: 657 kVA (526 kW)</span>
-                                    </div>
-                                </div>
-                            </div>
+                        @if($product->short_description)
+                            <p class="product-description">{{ $product->short_description }}</p>
+                        @endif
+                        
+                        <div class="product-meta">
+                            @if($product->power_range)
+                                <span class="power-range">
+                                    <i class="fas fa-bolt"></i> {{ $product->power_range }}
+                                </span>
+                            @endif
                             
-                            <div class="specs-row-inline">
-                                <div class="spec-group">
-                                    <span class="spec-label">⚡ VOLTAGE:</span>
-                                    <span class="spec-value">400/230V</span>
-                                </div>
-                                
-                                <div class="spec-group">
-                                    <span class="spec-label">🏭 EMISSIONS:</span>
-                                    <span class="spec-value">EU Stage II</span>
-                                </div>
-                            </div>
+                            @if($product->price)
+                                <span class="price">{{ $product->formatted_price }}</span>
+                            @endif
                         </div>
                         
-                        <div class="generator-actions">
-                            <a href="{{ route('products.index') }}" class="download-btn">
-                                <i class="fas fa-download"></i>
-                                Download data sheet
+                        <div class="product-actions">
+                            {{-- <a href="{{ route('products.show', $product) }}" class="btn btn-outline-primary">
+                                View Details
+                            </a> --}}
+                            <a href="{{ route('products.quote-request', $product) }}" class="btn btn-primary">
+                                View Details
                             </a>
                         </div>
                     </div>
-                </div>
-                
-                <div class="generator-card">
-                    <div class="card-image-section">
-                        <div class="generator-card-header">
-                            <span class="emergency-balance-badge">EMERGENCY BALANCE</span>
-                        </div>
-                        
-                        <div class="generator-image">
-                            <img src="{{ asset('images/Product_Services/3-2-1-1.png') }}" alt="BGB 650 ST Generator">
-                        </div>
-                        
-                        <div class="card-badges">
-                            <span class="freq-badge">50HZ</span>
-                            <span class="phase-badge">3 PHASES</span>
-                        </div>
-                    </div>
-                    
-                    <div class="card-specs-section">
-                        <h3 class="generator-model">BGB 650 ST</h3>
-                        
-                        <div class="specs-content">
-                            <div class="spec-group">
-                                <div class="spec-row">
-                                    <span class="spec-label">⚡ POWER:</span>
-                                    <div class="power-specs">
-                                        <span class="power-line">PRP: 591 kVA (473 kW)</span>
-                                        <span class="power-line">ESP: 648 kVA (518 kW)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="specs-row-inline">
-                                <div class="spec-group">
-                                    <span class="spec-label">⚡ VOLTAGE:</span>
-                                    <span class="spec-value">400/230V</span>
-                                </div>
-                                
-                                <div class="spec-group">
-                                    <span class="spec-label">🏭 EMISSIONS:</span>
-                                    <span class="spec-value">EU Stage 0</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="generator-actions">
-                            <a href="{{ route('products.index') }}" class="download-btn">
-                                <i class="fas fa-download"></i>
-                                Download data sheet
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="generator-card">
-                    <div class="card-image-section">
-                        <div class="generator-card-header">
-                            <span class="emergency-balance-badge">EMERGENCY BALANCE</span>
-                        </div>
-                        
-                        <div class="generator-image">
-                            <img src="{{ asset('images/Product_Services/2-3-1-1.png') }}" alt="BGV/SW 450 ST Generator">
-                        </div>
-                        
-                        <div class="card-badges">
-                            <span class="freq-badge">50HZ</span>
-                            <span class="phase-badge">3 PHASES</span>
-                        </div>
-                    </div>
-                    
-                    <div class="card-specs-section">
-                        <h3 class="generator-model">BGV/SW 450 ST</h3>
-                        
-                        <div class="specs-content">
-                            <div class="spec-group">
-                                <div class="spec-row">
-                                    <span class="spec-label">⚡ POWER:</span>
-                                    <div class="power-specs">
-                                        <span class="power-line">PRP: 518 kVA (414 kW)</span>
-                                        <span class="power-line">ESP: 567 kVA (454 kW)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="specs-row-inline">
-                                <div class="spec-group">
-                                    <span class="spec-label">⚡ VOLTAGE:</span>
-                                    <span class="spec-value">220/127V</span>
-                                </div>
-                                
-                                <div class="spec-group">
-                                    <span class="spec-label">🏭 EMISSIONS:</span>
-                                    <span class="spec-value">EU Stage II</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="generator-actions">
-                            <a href="{{ route('products.index') }}" class="download-btn">
-                                <i class="fas fa-download"></i>
-                                Download data sheet
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="generator-card">
-                    <div class="card-image-section">
-                        <div class="generator-card-header">
-                            <span class="emergency-balance-badge">EMERGENCY BALANCE</span>
-                        </div>
-                        
-                        <div class="generator-image">
-                            <img src="{{ asset('images/Product_Services/1-4-1-1.png') }}" alt="BGVW 450 ST Generator">
-                        </div>
-                        
-                        <div class="card-badges">
-                            <span class="freq-badge">60HZ</span>
-                            <span class="phase-badge">3 PHASES</span>
-                        </div>
-                    </div>
-                    
-                    <div class="card-specs-section">
-                        <h3 class="generator-model">BGVW 450 ST</h3>
-                        
-                        <div class="specs-content">
-                            <div class="spec-group">
-                                <div class="spec-row">
-                                    <span class="spec-label">⚡ POWER:</span>
-                                    <div class="power-specs">
-                                        <span class="power-line">PRP: 518 kVA (414 kW)</span>
-                                        <span class="power-line">ESP: 567 kVA (454 kW)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="specs-row-inline">
-                                <div class="spec-group">
-                                    <span class="spec-label">⚡ VOLTAGE:</span>
-                                    <span class="spec-value">220/127V</span>
-                                </div>
-                                
-                                <div class="spec-group">
-                                    <span class="spec-label">🏭 EMISSIONS:</span>
-                                    <span class="spec-value">EU Stage II</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="generator-actions">
-                            <a href="{{ route('products.index') }}" class="download-btn">
-                                <i class="fas fa-download"></i>
-                                Download data sheet
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                </article>
+                @endforeach
             </div>
         @endif
-        
-        <div class="text-center mt-4">
-            <a href="{{ route('products.index') }}" class="btn btn-outline-primary btn-lg">
-                View All Products
-            </a>
-        </div>
     </div>
 </section>
+
+ 
+    
+    <style>
+<style>
+.hero-banner {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    padding: 4rem 0;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.breadcrumb {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    margin: 0;
+}
+
+.breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: white;
+}
+
+.products-listing {
+    padding: 4rem 0;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 3rem;
+}
+
+.featured-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #dc2626;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.category-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.product-content {
+    padding: 1.5rem;
+}
+
+.product-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.product-title a {
+    color: #111827;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.product-title a:hover {
+    color: #3b82f6;
+}
+
+.product-description {
+    color: #6b7280;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.product-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.power-range {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #059669;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.price {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #dc2626;
+}
+
+.product-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    color: white;
+}
+    
+.btn-outline-primary {
+    color: #3b82f6;
+    border-color: #3b82f6;
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: #3b82f6;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-actions {
+        flex-direction: column;
+    }
+}
+</style>
+
+

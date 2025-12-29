@@ -40,6 +40,24 @@
                     </div>
                 @endif
 
+                <div class="product-image">
+                        @if($product->featured_image)
+                            <img src="{{ $product->featured_image_url }}" 
+                                 alt="{{ $product->image_alt_text ?: $product->title }}" 
+                                 loading="lazy">
+                       
+                           
+                        @endif
+                        
+                        @if($product->is_featured)
+                            <span class="featured-badge">Featured</span>
+                        @endif
+                        
+                        @if($product->category)
+                            <span class="category-badge">{{ $product->category }}</span>
+                        @endif
+                    </div>
+
                <section class="product-description">
                     <h2>Product Description</h2>
                     <div class="rich-content">
@@ -289,9 +307,9 @@
 
 .product-image {
     width: 100%;
-    height: 200px;
+    
     overflow: hidden;
-    border-radius: 0.75rem;
+    
     margin-bottom: 1.5rem;
 }
 
@@ -423,23 +441,23 @@
 }
 
 .btn-primary {
-    background: #3b82f6;
+    background: var(--primary-color);
     color: white;
 }
 
 .btn-primary:hover {
-    background: #2563eb;
+    background: var(--primary-hover);
     color: white;
 }
 
 .btn-outline-primary {
-    color: #3b82f6;
-    border-color: #3b82f6;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
     background: transparent;
 }
 
 .btn-outline-primary:hover {
-    background: #3b82f6;
+    background: var(--primary-hover);
     color: white;
 }
 

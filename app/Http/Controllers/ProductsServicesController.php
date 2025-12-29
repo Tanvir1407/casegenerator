@@ -9,14 +9,12 @@ class ProductsServicesController extends Controller
 {
     public function index()
     {
-        // Get featured products for the products-services page
-        $featuredProducts = Product::published()
-            ->featured()
+        // Get all published products for the products-services page
+        $products = Product::published()
             ->ordered()
-            ->take(3)
             ->get();
 
-        return view('pages.products-services.index', compact('featuredProducts'));
+        return view('pages.products-services.index', compact('products'));
     }
 
     public function requestQuote($productId)
