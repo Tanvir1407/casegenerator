@@ -16,14 +16,28 @@
                 @foreach($posts as $index => $post)
                     <article class="blog-card">
                         <div class="blog-card-inner">
-                            @if($post->featured_image)
-                                <div class="blog-image-wrapper">
+                            <div class="blog-image-wrapper">
+                                @if($post->featured_image)
                                     <img src="{{ asset('storage/' . $post->featured_image) }}" 
                                          alt="{{ $post->title }}" 
                                          class="blog-image"
-                                         loading="lazy">
-                                </div>
-                            @endif
+                                         loading="lazy"
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="blog-image-placeholder" style="display: none;">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M21 19V5C21 3.9 20.1 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19ZM8.5 13.5L11 16.51L14.5 12L19 18H5L8.5 13.5Z" fill="currentColor"/>
+                                        </svg>
+                                        <span>No Image Available</span>
+                                    </div>
+                                @else
+                                    <div class="blog-image-placeholder">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M21 19V5C21 3.9 20.1 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19ZM8.5 13.5L11 16.51L14.5 12L19 18H5L8.5 13.5Z" fill="currentColor"/>
+                                        </svg>
+                                        <span>No Image Available</span>
+                                    </div>
+                                @endif
+                            </div>
                             
                             <div class="blog-content">
                                 <div class="blog-meta">
@@ -193,7 +207,7 @@
 .blog-image-wrapper {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 280px;
     overflow: hidden;
     background: #f0f0f0;
 }
@@ -204,9 +218,34 @@
     object-fit: cover;
 }
 
+.blog-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    color: #94a3b8;
+}
+
+.blog-image-placeholder svg {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.blog-image-placeholder span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #94a3b8;
+    letter-spacing: 0.3px;
+}
+
 /* Blog Content */
 .blog-content {
-    padding: 30px;
+    /* padding: 30px; */
     flex-grow: 1;
     display: flex;
     flex-direction: column;

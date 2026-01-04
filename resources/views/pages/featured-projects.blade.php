@@ -106,6 +106,27 @@
                 transform: scale(1.25);
             }
 
+            /* Title Overlay on Hover */
+            .ap-image-wrapper .ap-desc {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0;
+                padding: 30px;
+                background: rgba(255, 255, 255, 0.95);
+                transform: translateY(100%);
+                opacity: 0;
+                transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+                box-shadow: 0 -10px 40px rgba(249, 156, 27, 0.4);
+                z-index: 10;
+            }
+
+            .ap-card:hover .ap-image-wrapper .ap-desc {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
             /* Badge Styling */
             .ap-badge {
                 position: absolute;
@@ -204,13 +225,13 @@
 
             .ap-subtitle {
                 display: inline-block;
-                color: var(--primary-color);
+                color: black;
                 font-size: 13px;
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 2px;
                 margin-bottom: 15px;
-                background: rgba(204, 51, 102, 0.08);
+                background:var(--primary-color);
                 padding: 6px 12px;
                 border-radius: 30px;
             }
@@ -246,7 +267,8 @@
                 <div class="ap-card">
                     <div class="ap-image-wrapper">
                         @if($project->featured_image && $project->featured_image_url)
-                            <img src="{{ $project->featured_image_url }}" alt="{{ $project->image_alt_text ?? $project->title }}" class="ap-image">
+                            <img src="{{ $project->featured_image_url }}" alt="{{ $project->image_alt_text ?? $project->title }}" class="ap-image"
+                                 onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27%3E%3Crect fill=%27%23f3f4f6%27 width=%27400%27 height=%27300%27/%3E%3Cg fill=%27%239ca3af%27%3E%3Cpath d=%27M100 80h200v140H100z%27 opacity=%270.3%27/%3E%3Cpath d=%27M140 110h120v20H140z%27/%3E%3Cpath d=%27M140 145h80v8H140z%27/%3E%3Ccircle cx=%27160%27 cy=%27180%27 r=%2712%27/%3E%3Ccircle cx=%27190%27 cy=%27180%27 r=%2712%27/%3E%3Ccircle cx=%27220%27 cy=%27180%27 r=%2712%27/%3E%3C/g%3E%3Ctext x=%27200%27 y=%27240%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2716%27 fill=%27%239ca3af%27%3EProject Image%3C/text%3E%3C/svg%3E';">
                         @else
                             <img src="{{ asset('images/placeholder.png') }}" alt="{{ $project->title }}" class="ap-image">
                         @endif
@@ -286,10 +308,10 @@
                                 {{ $project->location ?? 'Location not specified' }}
                             </span>
                         </div>
+                        <p class="ap-desc">
+                            {{ $project->title }}
+                        </p>
                     </div>
-                    <p class="ap-desc">
-                        {{ $project->title }}
-                    </p>
                 </div>
                 @endforeach
             </div>

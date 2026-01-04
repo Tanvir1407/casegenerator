@@ -1,2 +1,35 @@
+# Robots.txt for Casa Generators
+
+# Allow all search engines to crawl the website
 User-agent: *
-Disallow:
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /filament/
+Disallow: /livewire/
+Disallow: /storage/private/
+
+# Disallow unnecessary Laravel paths
+Disallow: /vendor/
+Disallow: /app/
+Disallow: /bootstrap/
+Disallow: /config/
+Disallow: /database/
+Disallow: /resources/
+Disallow: /routes/
+Disallow: /tests/
+
+# Allow CSS, JS, and Images for search engines
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /build/
+Allow: /fonts/
+Allow: /storage/
+
+# Disallow API routes (if you have any private ones)
+# Disallow: /api/
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml

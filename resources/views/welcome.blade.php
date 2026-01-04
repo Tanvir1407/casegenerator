@@ -28,6 +28,7 @@
                                 <a href="{{ route('post.show', $post->slug) }}">
                                     <img src="{{ Storage::url($post->featured_image) }}" 
                                          alt="{{ $post->image_alt_text ?? $post->title }}"
+                                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27%3E%3Crect fill=%27%23f3f4f6%27 width=%27400%27 height=%27300%27/%3E%3Cg fill=%27%239ca3af%27%3E%3Cpath d=%27M150 100h100v40H150z%27/%3E%3Cpath d=%27M160 160h80v10h-80z%27/%3E%3Cpath d=%27M160 180h60v8h-60z%27/%3E%3Ccircle cx=%27120%27 cy=%27120%27 r=%2715%27/%3E%3C/g%3E%3Ctext x=%27200%27 y=%27220%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2714%27 fill=%27%239ca3af%27%3EImage not available%3C/text%3E%3C/svg%3E';">
                                          class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                                 </a>
                             </div>

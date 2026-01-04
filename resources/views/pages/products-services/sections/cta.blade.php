@@ -51,12 +51,12 @@
                 </form>
             </div>
 
-            <div class="contact-map-card">
+            <div class="contact-map-cards">
+                           <img src="{{ asset('images/Product_Services/2-3-1-1.png') }}" alt="Company Brochure" class="company-brochure">
 
                 <section class="faq-contact-section">
     <div class="container">
         <div class="faq-support-card">
-            <img src="{{ asset('images/Product_Services/2-3-1-1.png') }}" alt="Company Brochure" class="company-brochure">
             <div class="support-content">
                 <h2 class="support-title">Dedicated Customer Teams & An Agile Services</h2>
                 <p class="support-text">Our worldwide presence ensures the timeliness, cost efficiency and compliance adherence required to ensure your production timelines are met.</p>

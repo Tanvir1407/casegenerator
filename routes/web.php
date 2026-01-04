@@ -13,6 +13,10 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeaturedProjectsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QuoteRequestController;
+use App\Http\Controllers\SitemapController;
+
+// SEO Routes
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Landing page route
 Route::get('/', [LandingPageController::class, 'index'])->name('home');

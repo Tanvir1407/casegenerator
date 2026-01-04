@@ -572,6 +572,7 @@
                     <figure class="featured-image-wrapper">
                         <img src="{{ Storage::url($post->featured_image) }}" 
                              alt="{{ $post->image_alt_text ?? $post->title }}"
+                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 800 400%27%3E%3Crect fill=%27%23f3f4f6%27 width=%27800%27 height=%27400%27/%3E%3Cg fill=%27%239ca3af%27%3E%3Cpath d=%27M300 120h200v60H300z%27/%3E%3Cpath d=%27M320 200h160v12H320z%27/%3E%3Cpath d=%27M320 230h120v10H320z%27/%3E%3Ccircle cx=%27260%27 cy=%27150%27 r=%2720%27/%3E%3C/g%3E%3Ctext x=%27400%27 y=%27320%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2718%27 fill=%27%239ca3af%27%3EFeatured Image Not Available%3C/text%3E%3C/svg%3E';">
                              class="featured-image"
                              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22%3E%3Crect fill=%22%23f1f5f9%22 width=%22800%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22sans-serif%22 font-size=%2216%22 fill=%22%2364748b%22%3EImage failed to load%3C/text%3E%3C/svg%3E';">
                         @if($post->image_alt_text)
@@ -865,7 +866,8 @@
                             @if($post->featured_image)
                                 <div class="related-post-image">
                                     <a href="{{ route('post.show', $post->slug) }}">
-                                        <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->image_alt_text ?? $post->title }}">
+                                        <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->image_alt_text ?? $post->title }}"
+                                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27%3E%3Crect fill=%27%23f3f4f6%27 width=%27400%27 height=%27300%27/%3E%3Cg fill=%27%239ca3af%27%3E%3Cpath d=%27M150 100h100v40H150z%27/%3E%3Cpath d=%27M160 160h80v10h-80z%27/%3E%3Cpath d=%27M160 180h60v8h-60z%27/%3E%3Ccircle cx=%27120%27 cy=%27120%27 r=%2715%27/%3E%3C/g%3E%3Ctext x=%27200%27 y=%27220%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2714%27 fill=%27%239ca3af%27%3EImage not available%3C/text%3E%3C/svg%3E';">
                                     </a>
                                 </div>
                             @endif

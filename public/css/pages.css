@@ -281,7 +281,7 @@
 /* Why Choose Section */
 .why-choose-section {
     padding: 80px 0;
-    background: var(--white);
+    background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
 }
 
 .why-choose-grid {
@@ -2001,6 +2001,17 @@
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 30px;
+    box-shadow: none;
+    /* remove any card shadows */
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-map-cards{
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    /* padding: 30px; */
     box-shadow: none;
     /* remove any card shadows */
     display: flex;

@@ -48,7 +48,7 @@
 <style>
 .values-section {
     padding: 80px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: white;
 }
 
 .section-header {

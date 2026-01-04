@@ -278,13 +278,15 @@
         </div>
 
         <div class="gps-grid">
-            @forelse($featuredProjects as $project)
+            @forelse($featuredProjects->take(3) as $project)
+           
             <!-- Dynamic Project Card -->
             <div class="gps-card">
                 <div class="gps-image-wrapper">
-                    <img src="{{ $project->featured_image ? Storage::url($project->featured_image) : asset('images/placeholder.jpg') }}" 
+                    <img src="{{ $project->featured_image_url ?? asset('images/placeholder.png') }}" 
                          alt="{{ $project->image_alt_text ?? $project->title }}" 
-                         class="gps-image">
+                         class="gps-image"
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27%3E%3Crect fill=%27%23f3f4f6%27 width=%27400%27 height=%27300%27/%3E%3Cg fill=%27%239ca3af%27%3E%3Cpath d=%27M100 80h200v140H100z%27 opacity=%270.3%27/%3E%3Cpath d=%27M140 110h120v20H140z%27/%3E%3Cpath d=%27M140 145h80v8H140z%27/%3E%3Ccircle cx=%27160%27 cy=%27180%27 r=%2712%27/%3E%3Ccircle cx=%27190%27 cy=%27180%27 r=%2712%27/%3E%3Ccircle cx=%27220%27 cy=%27180%27 r=%2712%27/%3E%3C/g%3E%3Ctext x=%27200%27 y=%27240%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2716%27 fill=%27%239ca3af%27%3EProject Image%3C/text%3E%3C/svg%3E';">
                     
                     <!-- Badge -->
                     <div class="gps-badge">

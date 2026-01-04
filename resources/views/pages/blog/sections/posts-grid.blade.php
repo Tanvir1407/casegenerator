@@ -73,6 +73,25 @@
             /* transform: scale(1.05); */
         }
 
+        /* Image Placeholder */
+        .image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        }
+
+        .placeholder-icon {
+            width: 64px;
+            height: 64px;
+            color: #94a3b8;
+        }
+
         /* Content */
         .blog-listing-content {
             padding: 28px;
@@ -254,13 +273,21 @@
             <div class="blog-listing-grid">
                 @foreach($posts as $post)
                     <article class="blog-listing-card">
-                        @if($post->featured_image)
-                            <div class="blog-listing-image">
-                                <a href="{{ route('post.show', $post->slug) }}">
-                                    <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->image_alt_text ?? $post->title }}">
-                                </a>
-                            </div>
-                        @endif
+                        <div class="blog-listing-image">
+                            <a href="{{ route('post.show', $post->slug) }}">
+                                @if($post->featured_image)
+                                    <img src="{{ Storage::url($post->featured_image) }}" 
+                                         alt="{{ $post->image_alt_text ?? $post->title }}"
+                                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27%3E%3Crect fill=%27%23f3f4f6%27 width=%27400%27 height=%27300%27/%3E%3Cg fill=%27%239ca3af%27%3E%3Cpath d=%27M150 100h100v40H150z%27/%3E%3Cpath d=%27M160 160h80v10h-80z%27/%3E%3Cpath d=%27M160 180h60v8h-60z%27/%3E%3Ccircle cx=%27120%27 cy=%27120%27 r=%2715%27/%3E%3C/g%3E%3Ctext x=%27200%27 y=%27220%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2714%27 fill=%27%239ca3af%27%3EImage not available%3C/text%3E%3C/svg%3E';">
+                                @else
+                                    <div class="image-placeholder">
+                                        <svg class="placeholder-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                @endif
+                            </a>
+                        </div>
                         <div class="blog-listing-content">
                             <div class="blog-listing-meta">
                                 <span class="blog-date">{{ $post->created_at->format('M d, Y') }}</span>

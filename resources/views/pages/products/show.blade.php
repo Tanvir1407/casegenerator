@@ -110,7 +110,8 @@
                                 <img src="{{ asset('storage/' . $image) }}" 
                                      alt="{{ $product->title }} gallery image"
                                      loading="lazy"
-                                     onclick="openImageModal('{{ asset('storage/' . $image) }}')">
+                                     onclick="openImageModal('{{ asset('storage/' . $image) }}')"
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 300 300%27%3E%3Crect fill=%27%23f3f4f6%27 width=%27300%27 height=%27300%27/%3E%3Cg fill=%27%239ca3af%27%3E%3Ccircle cx=%27150%27 cy=%27150%27 r=%2740%27/%3E%3Cpath d=%27M130 150l15 15 25-30%27 stroke=%27%23f3f4f6%27 stroke-width=%274%27 fill=%27none%27/%3E%3C/g%3E%3Ctext x=%27150%27 y=%27240%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2714%27 fill=%27%239ca3af%27%3EGallery Image%3C/text%3E%3C/svg%3E';">
                             </div>
                         @endforeach
                     </div>
