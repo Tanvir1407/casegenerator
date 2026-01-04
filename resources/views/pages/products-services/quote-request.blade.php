@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,6 +18,7 @@
             flex-direction: column;
             margin-top: 50px;
         }
+        
 
         .quote-request-main {
             flex: 1;
@@ -329,4 +330,4 @@
 
     <script src="{{ asset('js/landing.js') }}"></script>
 </body>
-</html>
+</html> --}}

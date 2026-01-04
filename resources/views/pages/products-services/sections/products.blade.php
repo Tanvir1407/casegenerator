@@ -499,6 +499,10 @@
     padding: 2rem; /* Tightened padding */
     display: flex;
     flex-direction: column;
+    border-top: 1px solid var(--primary-color);
+    border-right: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+    border-radius: 0 24px 24px 0;
 }
 
 .spec-grid {

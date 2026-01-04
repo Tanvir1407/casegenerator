@@ -273,7 +273,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
+    border-radius: 11px;
     padding: 8px 16px;
     margin-bottom: 24px;
     font-size: 14px;
@@ -911,7 +911,7 @@ body {
 .product-description {
     font-size: 15px;
     line-height: 1.6;
-    color: var(--text-light);
+    /* color: var(--text-light); */
     margin: 0;
 }
 

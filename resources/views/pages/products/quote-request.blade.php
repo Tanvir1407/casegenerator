@@ -14,7 +14,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    @include('landing.sections.header')
+    <!-- Enhanced Header with Mobile Menu -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    <img src="{{ asset('images/Logo/Casagenerators Logo (1).png') }}" alt="Casagenerators Logo" class="logo-image">
+                </a>
+                
+                <!-- Mobile Menu Toggle -->
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="{{ route('about') }}">About Us</a></li>
+                    <li><a href="{{ route('products-services') }}">Products & Services</a></li>
+                    <li><a href="{{ route('blog') }}">Blog</a></li>
+                    <li><a href="{{ route('awards') }}">Awards & Certificates</a></li>
+                    <li><a href="{{ route('faq') }}">FAQ</a></li>
+                    <li><a href="{{ route('contact') }}">Contact</a></li>
+                </ul>
+                <a href="{{ route('home') }}#contact-form" class="btn btn-primary header-cta-btn">Request a Quote</a>
+            </nav>
+        </div>
+    </header>
+
     
     <section class="quote-hero">
         
@@ -423,7 +450,7 @@
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 
 .contact-item i {
@@ -541,7 +568,7 @@
 .specs-card {
     background: #ffffff;
     border-radius: 12px;
-    padding: 24px;
+    padding: 2rem;
     
     border: 1px solid #e5e7eb;
     margin-top: 1.5rem;
@@ -574,11 +601,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px;
-    
-    border-radius: 10px;
+    padding: 8px 3px;
  
-    border: 1px solid transparent;
+    border-bottom: 2px solid #f7fafc;
 }
 
 /* .spec-item:hover {
@@ -612,8 +637,172 @@
         text-align: left;
     }
 }
+
+/* Enhanced Header Styles */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text-dark);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.header-cta-btn {
+    white-space: nowrap;
+}
+
+/* Mobile Responsive Header */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(15px);
+        padding: 20px;
+        gap: 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-120%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        transform: translateY(0);
+    }
+
+    .nav-menu li {
+        width: 100%;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a {
+        color: var(--text-dark) !important;
+        display: block;
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navbar .header-cta-btn {
+        display: none;
+    }
+
+    .logo-image {
+        height: 35px;
+    }
+
+    .main-header {
+        padding: 15px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 36px;
+    }
+    
+    .quote-hero {
+        padding: 100px 20px;
+    }
+}
 </style>
 
     @include('landing.sections.footer')
+
+    <!-- Enhanced Header JavaScript -->
+    <script>
+        // Mobile menu toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a menu item
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navMenu.contains(event.target);
+                const isClickOnToggle = menuToggle.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // Sticky header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.includes('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href.split('#')[1] ? '#' + href.split('#')[1] : href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
