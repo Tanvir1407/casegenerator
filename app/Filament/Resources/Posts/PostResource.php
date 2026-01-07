@@ -54,7 +54,20 @@ class PostResource extends Resource
                 ->disk('public')
                 ->directory('posts/featured')
                 ->visibility('public')
-                ->columnSpanFull(),
+                ->maxSize(5120)
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
+                ->imageEditor()
+                ->imageEditorAspectRatios([
+                    '16:9',
+                    '4:3',
+                    '1:1',
+                ])
+                ->imageResizeMode('cover')
+                ->imageCropAspectRatio('16:9')
+                ->imageResizeTargetWidth(1200)
+                ->imageResizeTargetHeight(675)
+                ->columnSpanFull()
+                ->helperText('Upload a high-quality featured image (recommended: 1200x675px, 16:9 ratio)'),
 
             RichEditor::make('body')
                 ->required()
