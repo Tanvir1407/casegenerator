@@ -14,6 +14,9 @@ use Filament\Tables;
 use Filament\Actions\ViewAction;
 use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Schemas\Components\Section;
 
 class PostResource extends Resource
 {
@@ -86,6 +89,48 @@ class PostResource extends Resource
                 ViewAction::make(),
                 DeleteAction::make(),
             ]);
+    }
+
+    /* ===================== INFOLIST ===================== */
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->schema([
+                Section::make()
+                    ->schema([
+                        ImageEntry::make('featured_image')
+                            ->hiddenLabel()
+                            ->disk('public')
+                            ->visibility('public')
+                            ->width('100%')
+                            ->height('auto')
+                            ->extraImgAttributes([
+                                'class' => 'w-full rounded-lg shadow-md object-cover',
+                                'style' => 'max-height: 400px;',
+                            ])
+                            ->columnSpanFull(),
+
+                        TextEntry::make('title')
+                            ->hiddenLabel()
+                            ->weight(\Filament\Support\Enums\FontWeight::Bold)
+                            ->size(\Filament\Support\Enums\TextSize::Large)
+                            ->extraAttributes(['class' => 'text-3xl mt-4'])
+                            ->columnSpanFull(),
+                            
+                        TextEntry::make('created_at')
+                            ->hiddenLabel()
+                            ->date('F d, Y')
+                            ->prefix('Published on ')
+                            ->color('gray')
+                            ->columnSpanFull(),
+
+                        TextEntry::make('body')
+                            ->hiddenLabel()
+                            ->html()
+                            ->columnSpanFull(),
+                    ])->columns(1),
+            ]) 
+            ->columns(1);
     }
 
     /* ===================== PAGES ===================== */
