@@ -193,6 +193,7 @@ class ProductResource extends Resource
                         ->label('Key Features')
                         ->schema([
                             TextInput::make('feature')
+                                ->hiddenLabel()
                                 ->required()
                                 ->maxLength(255)
                                 ->placeholder('Enter a key feature'),
@@ -215,6 +216,7 @@ class ProductResource extends Resource
                                 ->maxLength(255)
                                 ->placeholder('e.g., Perkins 1206C-E70TTA'),
                         ])
+                        ->columns(2)
                         ->addActionLabel('Add Specification')
                         ->columnSpanFull()
                         ->helperText('Add detailed technical specifications'),
