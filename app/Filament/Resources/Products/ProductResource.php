@@ -20,6 +20,8 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use App\Filament\Resources\Products\Pages\ListProducts;
 use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
@@ -250,7 +252,9 @@ class ProductResource extends Resource
                 
                 TextColumn::make('title')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->limit(20)
+                    ->wrap(),
                 
                 TextColumn::make('category')
                     ->badge()
@@ -303,6 +307,10 @@ class ProductResource extends Resource
                         'draft' => 'Draft',
                         'published' => 'Published',
                     ]),
+            ])
+            ->actions([
+                ViewAction::make(),
+                EditAction::make(),
             ])
             ->defaultSort('sort_order', 'asc');
     }
