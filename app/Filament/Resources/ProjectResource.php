@@ -17,6 +17,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
@@ -168,7 +170,8 @@ class ProjectResource extends Resource
                     ->falseLabel('Not featured only'),
             ])
             ->actions([
-                // Actions are handled in page classes
+                ViewAction::make(),
+                EditAction::make(),
             ])
             ->bulkActions([
                 // Bulk actions are handled in page classes

@@ -11,6 +11,9 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\ViewAction;
 use Filament\Actions\DeleteAction;
+use Filament\Schemas\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Grid;
 
 class ContactResource extends Resource
 {
@@ -23,6 +26,48 @@ class ContactResource extends Resource
     protected static ?string $pluralModelLabel = 'contact messages';
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-envelope';
+
+    /* ===================== INFOLIST (VIEW) ===================== */
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->schema([
+                Section::make('Contact Information')
+                    ->schema([
+                        Grid::make(1)
+                            ->schema([
+                                TextEntry::make('name')
+                                    ->icon('heroicon-m-user')
+                                    ->label('Name'),
+                                
+                                TextEntry::make('email')
+                                    ->icon('heroicon-m-envelope')
+                                    ->label('Email')
+                                    ->copyable(),
+                                
+                                TextEntry::make('phone')
+                                    ->icon('heroicon-m-phone')
+                                    ->label('Phone')
+                                    ->placeholder('N/A'),
+                            ]),
+                    ]),
+
+                Section::make('Message Content')
+                    ->schema([
+                        TextEntry::make('message')
+                            ->hiddenLabel()
+                            ->prose() // Makes it look like an article/content
+                            ->markdown(), // Assuming message might be plain text but markdown adds nice typography
+                        
+                        TextEntry::make('created_at')
+                            ->label('Received At')
+                            ->dateTime('F j, Y, g:i a')
+                            ->badge()
+                            ->color('gray')
+                            ->alignLeft(),
+                    ]),
+            ]);
+    }
 
     /* ===================== FORM ===================== */
     public static function form(Schema $schema): Schema
@@ -96,3 +141,4 @@ class ContactResource extends Resource
         ];
     }
 }
+
