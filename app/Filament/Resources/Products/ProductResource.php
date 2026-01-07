@@ -26,6 +26,12 @@ use App\Filament\Resources\Products\Pages\ListProducts;
 use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
 use App\Filament\Resources\Products\Pages\ViewProduct;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\RepeatableEntry;
+
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductResource extends Resource
@@ -77,12 +83,7 @@ class ProductResource extends Resource
                                 ->maxLength(255)
                         ]),
 
-                    Textarea::make('short_description')
-                        ->label('Short Description')
-                        ->rows(3)
-                        ->maxLength(500)
-                        ->helperText('Brief description for product cards and listings (max 500 characters)'),
-
+                    
                     TextInput::make('power_range')
                         ->label('Power Range')
                         ->placeholder('e.g., 1000 kVA - 5000 kVA')
@@ -92,6 +93,13 @@ class ProductResource extends Resource
                         ->numeric()
                         ->prefix('$')
                         ->placeholder('0.00'),
+                    Textarea::make('short_description')
+                        ->label('Short Description')
+                        ->rows(3)
+                        ->maxLength(500)
+                        ->helperText('Brief description for product cards and listings (max 500 characters)')
+                        ->columnSpanFull(),
+
                 ])
                 ->columns(2),
 
@@ -213,7 +221,8 @@ class ProductResource extends Resource
                 ])
                 ->collapsible(),
 
-            Section::make('Settings')
+            
+                Section::make('Settings')
                 ->schema([
                     Grid::make(3)
                         ->schema([
@@ -236,7 +245,101 @@ class ProductResource extends Resource
                         ])
                 ])
                 ->collapsible(),
-        ]);
+        ])
+        ->columns(1);
+        
+    }
+
+    /* ===================== INFOLIST ===================== */
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->schema([
+                Section::make('Basic Information')
+                    ->schema([
+                        Grid::make([
+                            'default' => 1,
+                            'md' => 3,
+                        ])
+                            ->schema([
+                                TextEntry::make('title')
+                                // ->size(\Filament\Infolists\Components\TextEntry\TextEntrySize::Large)
+                                ->weight(\Filament\Support\Enums\FontWeight::Bold),
+                                
+                                TextEntry::make('status')
+                                    ->badge()
+                                    ->colors([
+                                        'danger' => 'draft',
+                                        'success' => 'published',
+                                    ]),
+
+                                TextEntry::make('is_featured')
+                                    ->label('Featured')
+                                    ->icon(fn (bool $state): string => $state ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle')
+                                    ->color(fn (bool $state): string => $state ? 'success' : 'gray'),
+                            ]),
+                    ]),
+                
+                Section::make('Description')
+                    ->schema([
+                        TextEntry::make('description')
+                            ->prose()
+                            ->markdown()
+                            ->hiddenLabel(),
+                    ]),
+
+                Section::make('Gallery')
+                    ->schema([
+                        ImageEntry::make('gallery_images')
+                            ->hiddenLabel()
+                            ->disk('public')
+                            ->height(200)
+                            ->extraImgAttributes([
+                                'class' => 'rounded-lg shadow-md object-cover',
+                            ]),
+                    ])
+                    ->visible(fn ($record) => !empty($record->gallery_images)),
+
+                Section::make('Technical Specifications & Features')
+                ->schema([
+                    Grid::make(2)
+                        ->schema([
+                            // Left Side: Specifications
+                            RepeatableEntry::make('specifications')
+                                ->label('Technical Specifications')
+                                ->contained(false)
+                                ->schema([
+                                    Grid::make(2)
+                                        ->schema([
+                                            TextEntry::make('spec_name')
+                                                ->hiddenLabel()
+                                                ->weight(\Filament\Support\Enums\FontWeight::Bold),
+                                            
+                                            TextEntry::make('spec_value')
+                                                ->hiddenLabel()
+                                                ->alignRight(), 
+                                        ])
+                                        ->extraAttributes([
+                                            'class' => 'border-b border-gray-100 dark:border-gray-800 py-2 last:border-0'
+                                        ]),
+                                ]),
+
+                            // Right Side: Features
+                            RepeatableEntry::make('features')
+                                ->label('Key Features')
+                                ->contained(false)
+                                ->schema([
+                                    TextEntry::make('feature')
+                                        ->hiddenLabel()
+                                        ->icon('heroicon-m-check-circle')
+                                        ->color('success')
+                                        ->extraAttributes(['class' => 'py-1']),
+                                ]),
+                        ]),
+                ])
+                ->columnSpanFull()
+            ])
+            ->columns(1);
     }
 
     /* ===================== TABLE ===================== */
