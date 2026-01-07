@@ -15,11 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create admin user
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@casagenerators.com',
-        ]);
+        // Seed admin user
+        $this->call(AdminUserSeeder::class);
 
         // Seed all data
         $this->call([

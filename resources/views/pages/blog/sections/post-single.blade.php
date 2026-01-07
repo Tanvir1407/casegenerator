@@ -131,7 +131,8 @@
 
         .featured-image {
             width: 100%;
-            height: auto;
+            height: 450px; /* Fixed banner height */
+            object-fit: cover;
             display: block;
             background-color: #f1f5f9;
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
@@ -562,52 +563,26 @@
             
             
             <article>
+                @if($post->featured_image)
+                    <div class="featured-image-wrapper" style="margin-top: 0; margin-bottom: 2rem;">
+                        <img src="{{ Storage::url($post->featured_image) }}" 
+                             alt="{{ $post->image_alt_text ?? $post->title }}" 
+                             class="featured-image">
+                    </div>
+                @endif
                 <header class="post-header">
                     <h1 class="post-title">{{ $post->title }}</h1>
                     <p class="post-meta">Published on {{ $post->created_at->format('F d, Y') }}</p>
                 </header>
 
-                {{-- Featured Image --}}
-                @if($post->featured_image)
-                    <figure class="featured-image-wrapper">
-                        <img src="{{ Storage::url($post->featured_image) }}" 
-                             alt="{{ $post->image_alt_text ?? $post->title }}"
-                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 800 400%27%3E%3Crect fill=%27%23f3f4f6%27 width=%27800%27 height=%27400%27/%3E%3Cg fill=%27%239ca3af%27%3E%3Cpath d=%27M300 120h200v60H300z%27/%3E%3Cpath d=%27M320 200h160v12H320z%27/%3E%3Cpath d=%27M320 230h120v10H320z%27/%3E%3Ccircle cx=%27260%27 cy=%27150%27 r=%2720%27/%3E%3C/g%3E%3Ctext x=%27400%27 y=%27320%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2718%27 fill=%27%239ca3af%27%3EFeatured Image Not Available%3C/text%3E%3C/svg%3E';">
-                             class="featured-image"
-                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22%3E%3Crect fill=%22%23f1f5f9%22 width=%22800%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22sans-serif%22 font-size=%2216%22 fill=%22%2364748b%22%3EImage failed to load%3C/text%3E%3C/svg%3E';">
-                        @if($post->image_alt_text)
-                            <figcaption class="image-caption">{{ $post->image_alt_text }}</figcaption>
-                        @endif
-                    </figure>
-                @endif
+
 
                 {{-- Post Body --}}
-                <div class="post-body">
-                    {!! $post->formatted_body !!}
+                <div class="post-body prose max-w-none prose-lg prose-slate dark:prose-invert">
+                    {!! $post->body !!}
                 </div>
 
-                {{-- Gallery Images --}}
-                @if($post->gallery_images && count($post->gallery_images) > 0)
-                    <section class="gallery-section">
-                        <h2 class="gallery-title">Gallery</h2>
-                        <div class="gallery-grid">
-                            @foreach($post->gallery_images as $image)
-                                @php
-                                    $imageUrl = Storage::url($image);
-                                @endphp
-                                <div class="gallery-item" 
-                                     role="button" 
-                                     tabindex="0"
-                                     onclick="openImageModal('{{ $imageUrl }}')"
-                                     onkeypress="if(event.key==='Enter') openImageModal('{{ $imageUrl }}')">
-                                    <img src="{{ $imageUrl }}" 
-                                         alt="Gallery image for {{ $post->title }}"
-                                         loading="lazy">
-                                </div>
-                            @endforeach
-                        </div>
-                    </section>
-                @endif
+
             </article>
         </div>
     </div>

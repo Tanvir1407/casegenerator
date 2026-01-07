@@ -55,7 +55,7 @@
         .blog-listing-image {
             position: relative;
             width: 100%;
-            padding-top: 75%; /* 4:3 aspect ratio (adjust to 56.25% for 16:9 if preferred) */
+            height: 250px; /* Fixed height for uniformity */
             overflow: hidden;
         }
 
