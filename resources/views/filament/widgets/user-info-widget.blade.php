@@ -225,9 +225,9 @@
         }
 
         .contacts-title {
+            color:black;
             font-size: 18px;
             font-weight: 700;
-            color: white;
             margin: 0 0 20px 0;
         }
 
@@ -237,6 +237,24 @@
             }
         }
 
+        .view-button {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #F99C1B 0%, #d97706 100%);
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(249, 156, 27, 0.3);
+        }
+
+        .view-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(249, 156, 27, 0.4);
+            color: white;
+        }
         .contacts-table {
             width: 100%;
             border-collapse: collapse;
@@ -372,6 +390,7 @@
                         <th>Email</th>
                         <th>Subject</th>
                         <th>Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -381,6 +400,9 @@
                             <td class="contact-email">{{ $contact->email }}</td>
                             <td>{{ Str::limit($contact->subject ?? 'N/A', 30) }}</td>
                             <td>{{ $contact->created_at->format('M d, Y') }}</td>
+                            <td class="actions-button">
+                                <a href="{{ route('filament.admin.resources.contacts.view', $contact) }}" class="view-button">View</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

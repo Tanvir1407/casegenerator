@@ -9,6 +9,8 @@ use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 
 class ContactResource extends Resource
 {
@@ -64,7 +66,7 @@ class ContactResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('message')
-                    ->limit(50)
+                    ->limit(20)
                     ->wrap(),
 
                 TextColumn::make('created_at')
@@ -76,7 +78,9 @@ class ContactResource extends Resource
                 //
             ])
             ->actions([
-                // Actions are handled in page classes
+                ViewAction::make()
+                    ->extraAttributes(['class' => 'view-button']),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 // 

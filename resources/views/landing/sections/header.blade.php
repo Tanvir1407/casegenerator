@@ -10,11 +10,16 @@
                 <li><a href="{{ route('blog') }}">Blog</a></li>
                 <li><a href="{{ route('awards') }}">Awards & Certificates</a></li>
                 <li><a href="{{ route('faq') }}">FAQ</a></li>
-                <li> <a href="{{ route('contact') }}" >
-                            Contact
-                    </a></li>
+                <li><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
-            <a href="{{ route('home') }}#contact-form" class="btn btn-primary">Request a Quote</a>
+            <div class="nav-actions">
+                <a href="{{ route('home') }}#contact-form" class="btn btn-primary">Request a Quote</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </nav>
     </div>
 </header>

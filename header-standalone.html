@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casagenerators Header - Complete Standalone</title>
+    
+    <style>
+        /* Reset & Root Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #F99C1B;
+            --primary-hover: #D97A0F;
+            --dark-blue: #001b44;
+            --light-blue: #e6f0ff;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: transparent;
+            padding: 30px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-header.scrolled {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-text {
+            font-family: "Inter", sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            line-height: 1;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: color 0.4s ease;
+        }
+
+        .main-header.scrolled .logo-text {
+            color: var(--text-dark);
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            transition: all 0.4s ease;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .main-header.scrolled .nav-menu a {
+            color: var(--text-dark);
+        }
+
+        .main-header.scrolled .btn-primary {
+            background: var(--primary-color) !important;
+            color: var(--white) !important;
+        }
+
+        .nav-menu a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 12px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            color: var(--white);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled .menu-toggle span {
+            background: var(--text-dark);
+        }
+
+        /* Demo Content Section */
+        .demo-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 100px 20px;
+        }
+
+        .demo-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .demo-content p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(15px);
+                padding: 20px;
+                gap: 0;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transform: translateY(-120%);
+                transition: transform 0.4s ease;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+            }
+
+            .nav-menu li {
+                width: 100%;
+                padding: 15px 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-menu a {
+                color: var(--text-dark) !important;
+                display: block;
+                width: 100%;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .navbar .btn-primary {
+                display: none;
+            }
+
+            .logo-image {
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .demo-content h1 {
+                font-size: 32px;
+            }
+
+            .demo-content p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50'%3E%3Ctext x='10' y='35' font-family='Inter, sans-serif' font-size='24' font-weight='800' fill='%23F99C1B'%3ECasagenerators%3C/text%3E%3C/svg%3E" alt="Casagenerators Logo" class="logo-image">
+                </a>
+                
+                <!-- Mobile Menu Toggle -->
+                <div class="menu-toggle" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#products">Products & Services</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#awards">Awards & Certificates</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact-form" class="btn btn-primary">Request a Quote</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Demo Content Section -->
+    <div class="demo-section">
+        <div class="demo-content">
+            <h1>Welcome to Casagenerators</h1>
+            <p>Scroll down to see the header effect in action</p>
+            <p style="margin-top: 20px; font-size: 16px; opacity: 0.7;">
+                This is a standalone demo with all HTML, CSS, and JavaScript in one file.
+            </p>
+        </div>
+    </div>
+
+    <!-- Additional Demo Sections for Scrolling -->
+    <div style="background: #fff; padding: 100px 20px; text-align: center;">
+        <div class="container">
+            <h2 style="color: var(--text-dark); margin-bottom: 20px;">About Us Section</h2>
+            <p style="color: var(--text-light); max-width: 800px; margin: 0 auto;">
+                This section demonstrates how the header changes when you scroll. 
+                Notice the background becomes white with blur effect and the text color changes.
+            </p>
+        </div>
+    </div>
+
+    <div style="background: #f5f5f5; padding: 100px 20px; text-align: center;">
+        <div class="container">
+            <h2 style="color: var(--text-dark); margin-bottom: 20px;">Products & Services</h2>
+            <p style="color: var(--text-light); max-width: 800px; margin: 0 auto;">
+                Keep scrolling to see more of the header behavior.
+            </p>
+        </div>
+    </div>
+
+    <div style="background: #fff; padding: 100px 20px; text-align: center;">
+        <div class="container">
+            <h2 style="color: var(--text-dark); margin-bottom: 20px;">Contact Section</h2>
+            <p style="color: var(--text-light); max-width: 800px; margin: 0 auto;">
+                The header stays fixed at the top with smooth transitions.
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Sticky header effect on scroll
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('.main-header');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const isClickInsideNav = navMenu.contains(event.target);
+            const isClickOnToggle = menuToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Close mobile menu when clicking on a menu item
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                const navMenu = document.getElementById('navMenu');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Log page load
+        console.log('Casagenerators Header - Standalone version loaded successfully!');
+        console.log('Features: Sticky header, smooth scroll, mobile responsive menu');
+    </script>
+
+</body>
+</html>
