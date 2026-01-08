@@ -58,12 +58,7 @@
     <div class="container">
         <div class="quote-grid">
             <div class="quote-form-container">
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
-                        {{ session('success') }}
-                    </div>
-                @endif
+                
 
                 <div class="product-image">
                         @if($product->featured_image)

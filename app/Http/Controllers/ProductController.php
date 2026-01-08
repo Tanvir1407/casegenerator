@@ -67,7 +67,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('products.quote-request', $product)
-            ->with('success', 'Your quote request has been submitted successfully! We will contact you soon.');
+            ->with('success', 'Your quote request has been submitted successfully!');
     }
 
     /**
