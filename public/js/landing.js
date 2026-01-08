@@ -194,3 +194,28 @@ function stopAutoSlide() {
         clearInterval(autoSlideInterval);
     }
 }
+
+// Experience Section Tabs Logic
+document.addEventListener('DOMContentLoaded', function () {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    if (tabBtns.length > 0 && tabPanels.length > 0) {
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const targetTab = this.getAttribute('data-tab');
+
+                // Remove active class from all buttons and panels
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanels.forEach(p => p.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding panel
+                this.classList.add('active');
+                const panel = document.getElementById(targetTab);
+                if (panel) {
+                    panel.classList.add('active');
+                }
+            });
+        });
+    }
+});
