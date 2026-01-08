@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casagenerators Header - Complete Standalone</title>
-    
+
     <style>
         /* Reset & Root Variables */
         * {
@@ -207,7 +208,7 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-menu {
-                position: fixed;
+                position: fixed !important;
                 top: 80px;
                 left: 0;
                 width: 100%;
@@ -261,6 +262,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Header Section -->
@@ -268,9 +270,10 @@
         <div class="container">
             <nav class="navbar">
                 <a href="/" class="logo">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50'%3E%3Ctext x='10' y='35' font-family='Inter, sans-serif' font-size='24' font-weight='800' fill='%23F99C1B'%3ECasagenerators%3C/text%3E%3C/svg%3E" alt="Casagenerators Logo" class="logo-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50'%3E%3Ctext x='10' y='35' font-family='Inter, sans-serif' font-size='24' font-weight='800' fill='%23F99C1B'%3ECasagenerators%3C/text%3E%3C/svg%3E"
+                        alt="Casagenerators Logo" class="logo-image">
                 </a>
-                
+
                 <!-- Mobile Menu Toggle -->
                 <div class="menu-toggle" onclick="toggleMobileMenu()">
                     <span></span>
@@ -307,7 +310,7 @@
         <div class="container">
             <h2 style="color: var(--text-dark); margin-bottom: 20px;">About Us Section</h2>
             <p style="color: var(--text-light); max-width: 800px; margin: 0 auto;">
-                This section demonstrates how the header changes when you scroll. 
+                This section demonstrates how the header changes when you scroll.
                 Notice the background becomes white with blur effect and the text color changes.
             </p>
         </div>
@@ -366,12 +369,12 @@
         }
 
         // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const navMenu = document.getElementById('navMenu');
             const menuToggle = document.querySelector('.menu-toggle');
             const isClickInsideNav = navMenu.contains(event.target);
             const isClickOnToggle = menuToggle.contains(event.target);
-            
+
             if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
             }
@@ -379,7 +382,7 @@
 
         // Close mobile menu when clicking on a menu item
         document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function () {
                 const navMenu = document.getElementById('navMenu');
                 navMenu.classList.remove('active');
             });
@@ -391,4 +394,5 @@
     </script>
 
 </body>
+
 </html>

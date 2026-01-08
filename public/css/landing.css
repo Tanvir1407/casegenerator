@@ -517,7 +517,7 @@ button {
     }
 
     .nav-menu {
-        position: fixed;
+        position: fixed !important;
         top: 0;
         right: -100%;
         width: 300px;
@@ -1567,9 +1567,7 @@ button {
         font-size: 32px;
     }
 
-    .nav-menu {
-        display: none;
-    }
+
 
     .experience-grid,
     .products-grid,
@@ -3087,7 +3085,9 @@ button {
         grid-template-columns: 1fr;
         gap: 40px;
     }
-}/* Experience Section Styles */
+}
+
+/* Experience Section Styles */
 .container-experience {
     max-width: 1200px;
     margin: 0 auto;
