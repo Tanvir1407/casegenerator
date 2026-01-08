@@ -1,0 +1,16 @@
+:root {
+    --custom-sidebar-bg: #f3f4f6;
+}
+
+.dark {
+    --custom-sidebar-bg: #18181b;
+    /* Matches standard dark theme or slightly different */
+}
+
+.fi-sidebar {
+    background-color: var(--custom-sidebar-bg) !important;
+}
+
+.fi-sidebar-header {
+    background-color: var(--custom-sidebar-bg) !important;
+}
