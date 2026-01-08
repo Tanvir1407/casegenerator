@@ -7,10 +7,15 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Section;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Grid;
+use Filament\Infolists\Infolist;
 
 class QuoteRequestResource extends Resource
 {
@@ -50,11 +55,6 @@ class QuoteRequestResource extends Resource
                         ->maxLength(20)
                         ->placeholder('Enter phone number'),
 
-                    TextInput::make('product_name')
-                        ->label('Product Name')
-                        ->maxLength(255)
-                        ->placeholder('Product name (if applicable)'),
-
                     Select::make('industry')
                         ->options([
                             'construction' => 'Construction',
@@ -75,7 +75,43 @@ class QuoteRequestResource extends Resource
                         ->placeholder('Enter additional details'),
                 ])
                 ->columns(2),
-        ]);
+        ])
+        ->columns(1);
+    }
+
+    /* ===================== INFOLIST ===================== */
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->schema([
+                Section::make('Quote Request Details')
+                    ->schema([
+                        Grid::make(3)
+                            ->schema([
+                                TextEntry::make('name')
+                                    ->weight(\Filament\Support\Enums\FontWeight::Bold),
+                                TextEntry::make('email')
+                                    ->icon('heroicon-m-envelope')
+                                    ->copyable(),
+                                TextEntry::make('phone')
+                                    ->icon('heroicon-m-phone'),
+                                
+                                TextEntry::make('industry')
+                                    ->formatStateUsing(fn (?string $state): string => $state ? ucwords(str_replace('-', ' ', $state)) : 'N/A')
+                                    ->badge(),
+                                TextEntry::make('created_at')
+                                    ->label('Submitted At')
+                                    ->dateTime(),
+                            ]),
+                        TextEntry::make('message')
+                            ->label('Additional Details')
+                            ->limit(20)
+                            ->columnSpanFull()
+                            ->prose()
+                            ->markdown(),
+                    ])
+            ])
+            ->columns(1);
     }
 
     /* ===================== TABLE ===================== */
@@ -86,12 +122,6 @@ class QuoteRequestResource extends Resource
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-
-                TextColumn::make('product_name')
-                    ->label('Product')
-                    ->searchable()
-                    ->sortable()
-                    ->placeholder('N/A'),
 
                 TextColumn::make('email')
                     ->searchable()
@@ -108,6 +138,12 @@ class QuoteRequestResource extends Resource
                     ->formatStateUsing(fn (?string $state): string => $state ? ucwords(str_replace('-', ' ', $state)) : 'N/A')
                     ->placeholder('N/A'),
 
+                TextColumn::make('message')
+                    ->label('Additional Details')
+                    ->limit(50)
+                    ->searchable()
+                    ->wrap(),
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -117,11 +153,13 @@ class QuoteRequestResource extends Resource
                 // Add filters here if needed
             ])
             ->actions([
-                // Actions will be available
+                ViewAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 // Bulk actions will be available
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     /* ===================== PAGES ===================== */

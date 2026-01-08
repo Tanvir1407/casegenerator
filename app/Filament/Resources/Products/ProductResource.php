@@ -417,7 +417,7 @@ class ProductResource extends Resource
                 ViewAction::make(),
                 EditAction::make(),
             ])
-            ->defaultSort('sort_order', 'asc');
+            ->defaultSort('created_at', 'desc');
     }
 
     /* ===================== PAGES ===================== */
