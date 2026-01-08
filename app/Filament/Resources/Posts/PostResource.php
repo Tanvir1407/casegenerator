@@ -17,6 +17,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Schemas\Components\Section;
+use Filament\Forms\Components\ViewField;
+
 
 class PostResource extends Resource
 {
@@ -69,16 +71,21 @@ class PostResource extends Resource
                 ->columnSpanFull()
                 ->helperText('Upload a high-quality featured image (recommended: 1200x675px, 16:9 ratio)'),
 
-            RichEditor::make('body')
-                ->required()
-                ->columnSpanFull()
-                ->fileAttachmentsDisk('public')
-                ->fileAttachmentsDirectory('blog-content')
-                ->fileAttachmentsVisibility('public'),
+            // RichEditor::make('body')
+            //     ->required()
+            //     ->columnSpanFull()
+            //     ->fileAttachmentsDisk('public')
+            //     ->fileAttachmentsDirectory('blog-content')
+            //     ->fileAttachmentsVisibility('public'),
+            
+            
 
+            ViewField::make('body')
+                ->view('components.tiny-mce-editor')
+                ->columnSpanFull(),
 
-        ]);
-    }
+            ]);
+        }
 
     /* ===================== TABLE ===================== */
     public static function table(Table $table): Table
