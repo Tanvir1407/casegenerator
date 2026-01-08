@@ -1,27 +1,23 @@
 {{-- CSS Fixes for Filament Z-Index Issues --}}
     <style>
-        /* এডিটর এর মেইন বক্স */
         .tox-tinymce {
             z-index: 1000 !important;
-            border-radius: 0.5rem !important; /* Filament এর সাথে মিল রাখার জন্য */
+            border-radius: 0.5rem !important; 
         }
         
-        /* ড্রপডাউন, কালার পিকার এবং মেনু পপআপ (সবচেয়ে গুরুত্বপূর্ণ) */
         .tox-tinymce-aux {
-            z-index: 999999 !important; /* Filament এর উপরে দেখানোর জন্য অনেক হাই ভ্যালু */
+            z-index: 999999 !important; 
         }
 
-        /* ডায়ালগ বক্স বা মডাল (যেমন: Insert Image) */
         .tox-dialog-wrap {
             z-index: 999999 !important;
         }
         
-        /* "Get all features" বাটন হাইড করার জন্য (Optional) */
         .tox-promotion {
             display: none !important;
         }
         
-        /* লোগো হাইড করার জন্য (Optional) */
+    
         .tox-statusbar__branding {
             display: none !important;
         }
