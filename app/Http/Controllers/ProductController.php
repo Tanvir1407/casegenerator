@@ -12,13 +12,89 @@ class ProductController extends Controller
     /**
      * Display a listing of published products.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $products = Product::published()
-            ->ordered()
-            ->get();
+        $query = Product::published()->ordered();
 
-        return view('pages.products.index', compact('products'));
+        // Filter by Fuel
+        if ($request->has('fuel')) {
+            $fuel = $request->fuel;
+            if (is_array($fuel)) {
+                $query->whereIn('fuel', $fuel);
+            } else {
+                $query->where('fuel', $fuel);
+            }
+        }
+
+        // Filter by Frequency
+        if ($request->has('frequency')) {
+             $frequency = $request->frequency;
+             if (is_array($frequency)) {
+                 $query->whereIn('frequency', $frequency);
+             } else {
+                 $query->where('frequency', $frequency);
+             }
+        }
+
+        // Filter by Voltage
+        if ($request->has('voltage')) {
+             $voltage = $request->voltage;
+             if (is_array($voltage)) {
+                 $query->whereIn('voltage', $voltage);
+             } else {
+                 $query->where('voltage', $voltage);
+             }
+        }
+
+        // Filter by Emissions
+        if ($request->has('emissions')) {
+             $emissions = $request->emissions;
+             if (is_array($emissions)) {
+                 $query->whereIn('emissions_rating', $emissions);
+             } else {
+                 $query->where('emissions_rating', $emissions);
+             }
+        }
+
+        // Filter by Version
+        if ($request->has('version')) {
+             $version = $request->version;
+             if (is_array($version)) {
+                 $query->whereIn('version', $version);
+             } else {
+                 $query->where('version', $version);
+             }
+        }
+
+        // Filter by Engine
+        if ($request->has('engine')) {
+             $engine = $request->engine;
+             if (is_array($engine)) {
+                 $query->whereIn('engine_brand', $engine);
+             } else {
+                 $query->where('engine_brand', $engine);
+             }
+        }
+
+        $products = $query->paginate(9)->withQueryString();
+
+        // Get filter options (distinct values) to pass to view
+        $fuels = Product::published()->distinct()->whereNotNull('fuel')->pluck('fuel');
+        $frequencies = Product::published()->distinct()->whereNotNull('frequency')->pluck('frequency');
+        $voltages = Product::published()->distinct()->whereNotNull('voltage')->pluck('voltage');
+        $emissions = Product::published()->distinct()->whereNotNull('emissions_rating')->pluck('emissions_rating');
+        $versions = Product::published()->distinct()->whereNotNull('version')->pluck('version');
+        $engines = Product::published()->distinct()->whereNotNull('engine_brand')->pluck('engine_brand');
+
+        return view('pages.products.index', compact(
+            'products', 
+            'fuels', 
+            'frequencies', 
+            'voltages', 
+            'emissions', 
+            'versions', 
+            'engines'
+        ));
     }
 
     /**

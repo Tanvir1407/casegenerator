@@ -2569,3 +2569,494 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+/* 
+    Product Page Refactor Styles 
+    Implementing Sidebar & Horizontal Card Layout 
+    Refined to match Dark Theme Reference
+*/
+
+.product-page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.product-page-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Sidebar Styles */
+.product-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.filter-panel {
+    background: transparent;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.filter-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.clear-filters-btn {
+    font-size: 13px;
+    color: #ef4444;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.clear-filters-btn:hover {
+    text-decoration: underline;
+}
+
+.filter-group {
+    margin-bottom: 15px;
+}
+
+/* Dark Sidebar Headers like reference */
+.filter-group-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    background: #4b5563;
+    /* Dark Grey/Blue */
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin: 0 0 10px 0;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter-group-title::after {
+    content: '\f078';
+    /* FontAwesome chevron-down */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.filter-group.collapsed .filter-group-title::after {
+    transform: rotate(-180deg);
+}
+
+.filter-group.collapsed .filter-options {
+    display: none;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 5px 10px 10px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #4b5563;
+}
+
+.filter-option:hover {
+    color: #2563eb;
+}
+
+/* Custom Checkbox Look */
+.filter-radio {
+    accent-color: #2563eb;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    /* Square look even if radio support varies */
+}
+
+/* Main Content Area */
+.product-main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.product-results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.results-count {
+    font-size: 16px;
+    color: #374151;
+    margin: 0;
+}
+
+.count-number {
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Product Grid (Horizontal Cards) */
+.products-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 30px;
+}
+
+.product-card-horizontal {
+    display: flex;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e5e7eb;
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 280px;
+}
+
+.product-card-horizontal:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Visual Side (Left) - Dark Theme */
+.card-visual-section {
+    width: 45%;
+    position: relative;
+    background: #374151;
+    /* Dark grey background */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Gradient overlay effect */
+.card-visual-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.power-range-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    line-height: 1.4;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.product-image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+}
+
+.product-main-image {
+    max-width: 90%;
+    max-height: 160px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+    /* Shadow for depth */
+}
+
+/* Footer Badges on Image */
+.visual-footer-badges {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    z-index: 10;
+}
+
+.spec-chip {
+    background: white;
+    color: #1f2937;
+    padding: 4px 12px;
+    font-size: 10px;
+    font-weight: 800;
+    border-radius: 20px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Info Side (Right) */
+.card-info-section {
+    width: 55%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    position: relative;
+}
+
+.product-post-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 20px 0;
+    line-height: 1.3;
+}
+
+.product-specs-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2 columns for specs */
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.spec-row-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.spec-icon-wrapper {
+    display: none;
+    /* Hide icons to match reference exactly if needed, or keep for style */
+}
+
+/* Or simpler spec layout */
+.spec-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.spec-header {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.spec-header i {
+    color: #9ca3af;
+    /* Icon with label */
+}
+
+.spec-body {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+}
+
+.spec-body-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.power-val {
+    display: block;
+    white-space: nowrap;
+}
+
+/* Footer Actions */
+.card-action-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.download-sheet-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2563eb;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+}
+
+.download-sheet-link:hover {
+    color: #1d4ed8;
+}
+
+.download-sheet-link i {
+    background: #2563eb;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .product-page-layout {
+        flex-direction: column;
+    }
+
+    .product-sidebar {
+        width: 100%;
+    }
+
+    .products-list-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .product-card-horizontal {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .card-visual-section {
+        width: 100%;
+        height: 220px;
+    }
+
+    .card-info-section {
+        width: 100%;
+    }
+}
+
+/* Modern Pagination Styles */
+.pagination-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    gap: 8px;
+    /* More space between buttons */
+    align-items: center;
+    background: white;
+    padding: 8px;
+    border-radius: 50px;
+    /* Pill shape container */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f3f4f6;
+}
+
+.page-item .page-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 14px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4b5563;
+    /* Darker gray text */
+    background-color: transparent;
+    border: none;
+    border-radius: 50px;
+    /* Circular/Pill buttons */
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-item .page-link:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+    transform: translateY(-1px);
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: white;
+    background-color: #2563eb;
+    /* Primary Blue */
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    /* Glow effect */
+}
+
+.page-item.disabled .page-link {
+    color: #d1d5db;
+    pointer-events: none;
+    background-color: transparent;
+}
+
+/* Arrows styling */
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+    font-size: 16px;
+    color: #2563eb;
+}
+
+.page-item:first-child .page-link:hover,
+.page-item:last-child .page-link:hover {
+    background-color: #eff6ff;
+}
+
+.page-item.disabled:first-child .page-link,
+.page-item.disabled:last-child .page-link {
+    color: #d1d5db;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .pagination {
+        gap: 4px;
+        padding: 5px;
+    }
+
+    .page-item .page-link {
+        min-width: 34px;
+        height: 34px;
+        font-size: 13px;
+        padding: 0 10px;
+    }
+}

@@ -10,7 +10,7 @@
                 <div class="footer-links-group">
                     <ul>
                         <li><a href="{{ route('about') }}">About Us</a></li>
-                        <li><a href="{{ route('products-services') }}">Business Sectors</a></li>
+                        <li><a href="{{ route('services') }}">Business Sectors</a></li>
                         <li><a href="{{ route('about') }}#team">Our Team</a></li>
                         <li><a href="{{ route('about') }}#story">Our History</a></li>
                     </ul>
@@ -18,22 +18,22 @@
             </div>
             
             <div class="footer-column">
-                <h4>Products & Services</h4>
+                <h4>Products</h4>
                 <ul>
-                    {{-- <li><a href="{{ route('products.index') }}">Generators</a></li> --}}
-                    <li><a href="{{ route('products-services') }}#industries">Applications</a></li>
-                    {{-- <li><a href="{{ route('products.index') }}">Brands</a></li> --}}
-                    <li><a href="{{ route('products-services') }}">Technologies</a></li>
+                    <li><a href="{{ route('products.index') }}">Generators</a></li>
+                    <li><a href="{{ route('services') }}#industries">Applications</a></li>
+                    <li><a href="{{ route('products.index') }}">Brands</a></li>
+                    <li><a href="{{ route('services') }}">Technologies</a></li>
                 </ul>
             </div>
             
             <div class="footer-column">
                 <h4>Our Services</h4>
                 <ul>
-                    <li><a href="{{ route('products-services') }}#services">Rental</a></li>
-                    <li><a href="{{ route('products-services') }}#services">Maintenance</a></li>
-                    <li><a href="{{ route('products-services') }}#services">After-Sales Service</a></li>
-                    <li><a href="{{ route('products-services') }}#services">Consulting</a></li>
+                    <li><a href="{{ route('services') }}">Rental</a></li>
+                    <li><a href="{{ route('services') }}">Maintenance</a></li>
+                    <li><a href="{{ route('services') }}">After-Sales Service</a></li>
+                    <li><a href="{{ route('services') }}">Consulting</a></li>
                 </ul>
             </div>
             

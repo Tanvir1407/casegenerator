@@ -32,7 +32,55 @@ class Product extends Model
         'is_featured',
         'status',
         'sort_order',
+        // Filter fields
+        'voltage',
+        'frequency',
+        'fuel',
+        'emissions_rating',
+        'engine_brand',
+        'engine_model',
+        'power_prp',
+        'power_esp',
+        'phases',
+        'version',
+
+        // New Specification Relationships
+        'engine_id',
+        'alternator_id',
+        'controller_id',
+        'generator_type_id',
+
+        // New Specification Data
+        'prime_power_kva',
+        'standby_power_kva',
+        'fuel_consumption_100_percent',
+        'fuel_tank_capacity',
+        'length_mm',
+        'width_mm',
+        'height_mm',
+        'weight_kg',
+        'noise_level_db',
     ];
+
+    public function engine()
+    {
+        return $this->belongsTo(Engine::class);
+    }
+
+    public function alternator()
+    {
+        return $this->belongsTo(Alternator::class);
+    }
+
+    public function controller()
+    {
+        return $this->belongsTo(Controller::class);
+    }
+
+    public function generatorType()
+    {
+        return $this->belongsTo(GeneratorType::class);
+    }
 
     protected $casts = [
         'gallery_images' => 'array',

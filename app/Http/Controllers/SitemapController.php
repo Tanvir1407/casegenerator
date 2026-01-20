@@ -21,8 +21,8 @@ class SitemapController extends Controller
         // Static pages
         $staticPages = [
             ['url' => route('about'), 'priority' => '0.9'],
-            ['url' => route('products-services'), 'priority' => '0.9'],
             ['url' => route('products.index'), 'priority' => '0.9'],
+            ['url' => route('services'), 'priority' => '0.9'],
             ['url' => route('projects.index'), 'priority' => '0.9'],
             ['url' => route('featured-projects'), 'priority' => '0.8'],
             ['url' => route('blog'), 'priority' => '0.8'],

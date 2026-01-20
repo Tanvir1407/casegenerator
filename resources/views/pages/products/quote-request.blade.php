@@ -31,7 +31,7 @@
 
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="{{ route('about') }}">About Us</a></li>
-                    <li><a href="{{ route('products-services') }}">Products & Services</a></li>
+                    <li><a href="{{ route('products.index') }}">Products</a></li>
                     <li><a href="{{ route('blog') }}">Blog</a></li>
                     <li><a href="{{ route('awards') }}">Awards & Certificates</a></li>
                     <li><a href="{{ route('faq') }}">FAQ</a></li>

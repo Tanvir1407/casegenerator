@@ -23,7 +23,7 @@ Route::get('/', [LandingPageController::class, 'index'])->name('home');
 
 // Page routes
 Route::get('/about-us', [AboutController::class, 'index'])->name('about');
-Route::get('/products-services', [ProductsServicesController::class, 'index'])->name('products-services');
+Route::get('/services', [App\Http\Controllers\ServicesController::class, 'index'])->name('services');
 
 // Product routes
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -33,7 +33,7 @@ Route::post('/products/{product:slug}/quote', [ProductController::class, 'storeQ
 Route::get('/products/{product:slug}/download-pdf', [ProductController::class, 'downloadPdf'])->name('products.download-pdf');
 
 // Legacy route support
-Route::get('/products-services/quote/{productId}', [ProductsServicesController::class, 'requestQuote'])->name('legacy.products.quote-request');
+// Route::get('/products-services/quote/{productId}', [ProductsServicesController::class, 'requestQuote'])->name('legacy.products.quote-request');
 Route::get('/featured-projects', [FeaturedProjectsController::class, 'index'])->name('featured-projects');
 
 // Project routes

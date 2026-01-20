@@ -14,6 +14,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Repeater;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
@@ -42,11 +43,14 @@ class ProductResource extends Resource
     
     protected static ?string $modelLabel = 'product';
     
+    // protected static ?string $navigationGroup = 'Catalog'; 
+    protected static string | \UnitEnum | null $navigationGroup = 'Catalog';
+
     protected static ?string $pluralModelLabel = 'products';
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cube';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     /* ===================== FORM ===================== */
     public static function form(Schema $schema): Schema
@@ -187,7 +191,64 @@ class ProductResource extends Resource
                 ])
                 ->collapsible(),
 
-            Section::make('Features & Specifications')
+            Section::make('Specifications')
+                ->schema([
+                    Grid::make(2)
+                        ->schema([
+                            Select::make('generator_type_id')
+                                ->relationship('generatorType', 'name')
+                                ->searchable()
+                                ->preload()
+                                ->createOptionForm([
+                                    TextInput::make('name')->required(),
+                                    TextInput::make('slug')->required(),
+                                ]),
+                            Select::make('controller_id')
+                                ->relationship('controller', 'type')
+                                ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->brand} - {$record->type}")
+                                ->searchable()
+                                ->preload(),
+                            Select::make('engine_id')
+                                ->relationship('engine', 'model')
+                                ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->brand} - {$record->model}")
+                                ->searchable()
+                                ->preload(),
+                            Select::make('alternator_id')
+                                ->relationship('alternator', 'model')
+                                ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->brand} - {$record->model}")
+                                ->searchable()
+                                ->preload(),
+                        ]),
+
+                    Fieldset::make('Power & Performance')
+                        ->schema([
+                            TextInput::make('prime_power_kva')
+                                ->label('Prime Power (kVA)')
+                                ->numeric(),
+                            TextInput::make('standby_power_kva')
+                                ->label('Standby Power (kVA)')
+                                ->numeric(),
+                            TextInput::make('fuel_consumption_100_percent')
+                                ->label('Fuel Cons. 100% (L/h)')
+                                ->numeric(),
+                            TextInput::make('fuel_tank_capacity')
+                                ->label('Fuel Tank (L)')
+                                ->numeric(),
+                            TextInput::make('noise_level_db')
+                                ->label('Noise Level (dB)')
+                                ->numeric(),
+                        ])->columns(3),
+
+                    Fieldset::make('Dimensions & Weight')
+                        ->schema([
+                            TextInput::make('length_mm')->label('Length (mm)')->numeric(),
+                            TextInput::make('width_mm')->label('Width (mm)')->numeric(),
+                            TextInput::make('height_mm')->label('Height (mm)')->numeric(),
+                            TextInput::make('weight_kg')->label('Weight (kg)')->numeric(),
+                        ])->columns(4),
+                ]),
+
+            Section::make('Features')
                 ->schema([
                     Repeater::make('features')
                         ->label('Key Features')
@@ -195,31 +256,10 @@ class ProductResource extends Resource
                             TextInput::make('feature')
                                 ->hiddenLabel()
                                 ->required()
-                                ->maxLength(255)
-                                ->placeholder('Enter a key feature'),
+                                ->maxLength(255),
                         ])
                         ->addActionLabel('Add Feature')
-                        ->columnSpanFull()
-                        ->helperText('Add key product features (e.g., "Power range: 1000 kVA - 5000 kVA")'),
-
-                    Repeater::make('specifications')
-                        ->label('Technical Specifications')
-                        ->schema([
-                            TextInput::make('spec_name')
-                                ->label('Specification')
-                                ->required()
-                                ->maxLength(255)
-                                ->placeholder('e.g., Engine Type'),
-                            TextInput::make('spec_value')
-                                ->label('Value')
-                                ->required()
-                                ->maxLength(255)
-                                ->placeholder('e.g., Perkins 1206C-E70TTA'),
-                        ])
-                        ->columns(2)
-                        ->addActionLabel('Add Specification')
-                        ->columnSpanFull()
-                        ->helperText('Add detailed technical specifications'),
+                        ->columnSpanFull(),
                 ])
                 ->collapsible(),
 
