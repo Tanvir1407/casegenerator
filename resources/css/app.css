@@ -909,3 +909,76 @@
         font-size: 1.5rem;
     }
 }
+
+
+
+
+
+/* --- Empty State Design --- */
+
+.empty-state-wrapper {
+    width: 100%;
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.empty-state-content {
+    text-align: center;
+    max-width: 400px;
+}
+
+/* Icon Design */
+.empty-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #f3f4f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+}
+
+.empty-icon i {
+    font-size: 32px;
+    color: #9ca3af;
+}
+
+/* Typography */
+.empty-state-content h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+.empty-state-content p {
+    font-size: 16px;
+    color: #6b7280;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Button Design */
+.btn-clear-filter {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: #e63946;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(230, 57, 70, 0.2);
+}
+
+.btn-clear-filter:hover {
+    background-color: #d62828;
+    color: #ffffff;
+    transform: translateY(-2px);
+}

@@ -135,13 +135,21 @@
         <p class="results-count">Showing <span class="count-number">{{ $products->count() }}</span> products of ({{ $products->total() }})</p>
     </div>
 
-    @if($products->isEmpty())
-        <div class="no-results-state">
-            <i class="fas fa-search"></i>
+ @if($products->isEmpty())
+    <div class="empty-state-wrapper">
+        <div class="empty-state-content">
+            <div class="empty-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            
             <h3>No products found</h3>
-            <p>Try adjusting your filters.</p>
-            <a href="{{ route('products.index') }}">Clear Filters</a>
+            <p>We couldn't find what you're looking for. <br> Try adjusting your search or filters.</p>
+            
+            <a href="{{ route('products.index') }}" class="btn-clear-filter">
+                Clear All Filters
+            </a>
         </div>
+    </div>
     @else
         <div class="product-cards-container">
             @foreach($products as $product)
