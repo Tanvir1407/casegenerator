@@ -34,23 +34,14 @@
             <!-- Header Section -->
             <div class="section-header">
                 <h1 class="section-title">Message from the CEO</h1>
-                <p class="section-subtitle">INSERT YOUR SUBTITLE HERE</p>
             </div>
 
             <!-- Main Content -->
             <div class="ceo-content-wrapper">
-                <!-- Profile Image Left -->
-                <div class="ceo-profile-section">
-                    <div class="ceo-avatar-container">
-                        <img src="{{ asset('images/ceo-profile.jpg') }}" alt="CEO Profile" class="ceo-profile-image">
-                        <div class="profile-overlay"></div>
-                    </div>
-                </div>
+               
 
                 <!-- Content Right -->
                 <div class="ceo-message-content">
-                    <h2 class="ceo-name">CEO Name</h2>
-                    <p class="ceo-title-role">CEO & Founder</p>
                     <p class="ceo-message-text">
                         Casablanca Electrical Generators & Equipment Trading is a leading company in the field of power generators, based in the United Arab Emirates since the early 2000s. Our diesel generators come with a large variety of sizes ranging from 9KVA to 2500KVA and feature big power with low emission and world-class fuel efficiency for prime, continuous, and standby applications.
                     </p>
@@ -149,12 +140,6 @@
     z-index: 2;
 }
 
-.ceo-content-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 60px;
-    align-items: center;
-}
 
 /* ==================== PROFILE SECTION ==================== */
 .ceo-profile-section {
@@ -234,10 +219,7 @@
         font-size: 3rem;
     }
 
-    .ceo-content-wrapper {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-    }
+
 
     .ceo-avatar-container {
         width: 300px;
@@ -274,10 +256,7 @@
         font-size: 2.2rem;
     }
 
-    .ceo-content-wrapper {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
+
 
     .ceo-profile-section {
         order: -1;

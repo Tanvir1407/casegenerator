@@ -1,4 +1,4 @@
-<section class="page-hero min-h-screen flex items-center justify-center">
+<section class="page-hero flex items-center justify-center">
     <div class="hero-background w-full h-full absolute inset-0"></div>
     <div class="relative container mx-auto px-4">
         <div class="text-center w-full flex flex-col items-center">

@@ -10,8 +10,10 @@
     <link rel="apple-touch-icon" href="{{ asset('images/logo/Casagenerators Logo (1).png') }}">
     <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pages.css') }}">
+    <link rel="stylesheet" href="{{asset('css/product-bottom.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     @include('landing.sections.header')
@@ -127,117 +129,174 @@
             </aside>
 
             <!-- Product Grid -->
-            <div class="product-main-content">
-                <div class="product-results-header">
-                    <p class="results-count">Showing <span class="count-number">{{ $products->count() }}</span> products of ({{ $products->total() }})</p>
+           <div class="product-main-content">
+    
+    <div class="product-results-header">
+        <p class="results-count">Showing <span class="count-number">{{ $products->count() }}</span> products of ({{ $products->total() }})</p>
+    </div>
+
+    @if($products->isEmpty())
+        <div class="no-results-state">
+            <i class="fas fa-search"></i>
+            <h3>No products found</h3>
+            <p>Try adjusting your filters.</p>
+            <a href="{{ route('products.index') }}">Clear Filters</a>
+        </div>
+    @else
+        <div class="product-cards-container">
+            @foreach($products as $product)
+            <div class="product-card-horizontal">
+                
+                <!-- Left Side: Image Section (40%) -->
+                <div class="card-image-section">
                     
-                    {{-- <div class="view-toggles">
-                         <button class="view-btn active"><i class="fas fa-list"></i></button>
-                         <button class="view-btn"><i class="fas fa-th-large"></i></button>
-                    </div> --}}
+                    <!-- Product Image -->
+                    <a href="{{ route('products.show', $product) }}" class="product-image-link">
+                        @if($product->featured_image)
+                            <img src="{{ $product->featured_image_url }}" alt="{{ $product->title }}" class="product-image">
+                        @else
+                            <i class="fas fa-image placeholder-icon"></i>
+                        @endif
+                    </a>
+
+                    <!-- Badges (Bottom Left) -->
+                    <div class="card-badges">
+                        @if($product->frequency)
+                            <span class="badge">
+                                {{ $product->frequency }}
+                            </span>
+                        @endif
+                        @if($product->phases)
+                            <span class="badge">
+                                {{ Str::limit($product->phases, 1) == '3' ? '3 PHASES' : $product->phases }}
+                            </span>
+                        @endif
+                    </div>
                 </div>
 
-                @if($products->isEmpty())
-                    <div class="no-results-state">
-                        <i class="fas fa-search no-results-icon"></i>
-                        <h3 class="no-results-title">No products found</h3>
-                        <p class="no-results-text">Try adjusting your filters.</p>
-                        <a href="{{ route('products.index') }}" class="clear-filters-link">Clear Filters</a>
-                    </div>
-                @else
-                    <div class="products-list-grid">
-                        @foreach($products as $product)
-                        <div class="product-card-horizontal">
-                            <!-- Card Left: Image & Badges -->
-                            <div class="card-visual-section">
-                                @if($product->power_range)
-                                <div class="power-range-badge">
-                                    {{ $product->power_range }}
+                <!-- Right Side: Details Section (60%) -->
+                <div class="card-details-section">
+                    
+                    <!-- Header -->
+                    <h3 class="card-title">
+                        <a href="{{ route('products.show', $product) }}">
+                            {{ $product->model_code ?? $product->title }}
+                        </a>
+                    </h3>
+
+                    <!-- Specs Grid -->
+                    <div class="specs-grid">
+                        
+                        <!-- Power Spec -->
+                        <div class="spec-column">
+                            <div class="spec-label-container">
+                                <div class="spec-icon-wrapper">
+                                    <i class="fas fa-bolt spec-icon"></i>
                                 </div>
-                                @endif
-                                
-                                <div class="product-image-container">
-                                    @if($product->featured_image)
-                                        <img src="{{ $product->featured_image_url }}" alt="{{ $product->title }}" 
-                                             class="product-main-image"
-                                             onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=No+Image';">
-                                    @else
-                                        <div class="placeholder-image-container">
-                                            <i class="fas fa-image"></i>
-                                        </div>
-                                    @endif
-                                </div>
-                                
-                                <div class="visual-footer-badges">
-                                    @if($product->frequency)
-                                    <span class="spec-chip">{{ $product->frequency }}</span>
-                                    @endif
-                                    @if($product->phases)
-                                    <span class="spec-chip">{{ $product->phases }}</span>
-                                    @endif
-                                </div>
+                                <span class="spec-label-text">POWER:</span>
                             </div>
                             
-                            <!-- Card Right: Details -->
-                            <div class="card-info-section">
-                                <h3 class="product-post-title">{{ $product->title }}</h3>
-                                
-                                <div class="product-specs-list">
-                                    <div class="spec-row-item">
-                                        <div class="spec-icon-wrapper"><i class="fas fa-bolt"></i></div>
-                                        <div class="spec-data">
-                                            <span class="spec-header">Power</span>
-                                            <div class="spec-body">
-                                                @if($product->power_prp) <span class="power-val">PRP: {{ $product->power_prp }}</span>@endif
-                                                @if($product->power_esp) <span class="power-val">ESP: {{ $product->power_esp }}</span>@endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="spec-row-item">
-                                        <div class="spec-icon-wrapper"><i class="fas fa-plug"></i></div>
-                                        <div class="spec-data">
-                                            <span class="spec-header">Voltage</span>
-                                            <span class="spec-body-text">{{ $product->voltage ?: '400/230V' }}</span>
-                                        </div>
-                                    </div>
-
-                                    @if($product->emissions_rating)
-                                    <div class="spec-row-item">
-                                        <div class="spec-icon-wrapper"><i class="fas fa-leaf"></i></div>
-                                        <div class="spec-data">
-                                            <span class="spec-header">Emissions</span>
-                                            <span class="spec-body-text">{{ $product->emissions_rating }}</span>
-                                        </div>
-                                    </div>
+                            <div class="spec-value-container">
+                                <!-- PRP Power -->
+                                @if($product->prime_power_kva || $product->prime_power_kw)
+                                <div class="spec-value text-navy">
+                                    <span class="spec-prefix">PRP:</span>
+                                    {{ $product->prime_power_kva ? (int)$product->prime_power_kva . ' kVA' : '' }}
+                                    @if($product->prime_power_kw) 
+                                        <span class="spec-sub">({{ (int)$product->prime_power_kw }} kW)</span> 
                                     @endif
                                 </div>
+                                @endif
 
-                                <div class="card-action-footer">
-                                    @if($product->pdf_file)
-                                        <a href="{{ route('products.download-pdf', $product) }}" class="download-sheet-link">
-                                            Download data sheet <i class="fas fa-download"></i>
-                                        </a>
-                                    @else
-                                        <span class="sheet-unavailable">Data sheet unavailable</span>
+                                <!-- ESP Power -->
+                                @if($product->standby_power_kva || $product->standby_power_kw)
+                                <div class="spec-value text-navy">
+                                    <span class="spec-prefix">ESP:</span>
+                                    {{ $product->standby_power_kva ? (int)$product->standby_power_kva . ' kVA' : '' }}
+                                    @if($product->standby_power_kw) 
+                                        <span class="spec-sub">({{ (int)$product->standby_power_kw }} kW)</span> 
                                     @endif
-                                    
-                                    
                                 </div>
+                                @endif
                             </div>
                         </div>
-                        @endforeach
+
+                        <!-- Secondary Specs (Voltage & Emissions) -->
+                        <div class="secondary-specs-grid">
+                            
+                            <!-- Voltage -->
+                            <div class="spec-column">
+                                <div class="spec-label-container">
+                                    <div class="spec-icon-wrapper">
+                                        <i class="fas fa-plug spec-icon"></i>
+                                    </div>
+                                    <span class="spec-label-text">VOLTAGE:</span>
+                                </div>
+                                <div class="spec-value-container text-navy">
+                                    {{ $product->voltage ?: '400/230V' }}
+                                </div>
+                            </div>
+
+                            <!-- Emissions -->
+                            <div class="spec-column spec-column-emissions">
+                                <div class="spec-label-container">
+                                    <div class="spec-icon-wrapper">
+                                        <i class="fas fa-leaf spec-icon"></i>
+                                    </div>
+                                    <span class="spec-label-text">EMISSIONS:</span>
+                                </div>
+                                <div class="spec-value-container text-navy">
+                                    {{ $product->technical_specifications['general']['emissions_level'] ?? $product->emissions_rating ?? 'Non-Regulated' }}
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    
-                    <div class="pagination-wrapper">
-                        {{ $products->links('vendor.pagination.custom') }}
-                    </div>
-                @endif
+
+                </div>
             </div>
+            @endforeach
+        </div>
+        
+        <div class="pagination-wrapper">
+            {{ $products->links('vendor.pagination.custom') }}
+        </div>
+    @endif
+</div>
         </div>
     </div>
+
+   <section class="casa-brochure-section">
+    <div class="container">
+        <div class="casa-brochure-wrapper">
+            
+            <div class="brochure-image-col">
+                <img src="{{ asset('images/Product_Services/2-3-1-1.png') }}" alt="Company Brochure" class="img-fluid">
+            </div>
+
+            <div class="brochure-content-col">
+                <div class="content-inner">
+                    <h2 class="section-title">Dedicated Customer Teams & </h2>
+                    <h2 class="section-title"><span class="highlight">Agile Services</span></h2>
+
+                    <p class="section-desc">
+                        Our worldwide presence ensures the timeliness, cost efficiency, and compliance adherence required to ensure your production timelines are met efficiently.
+                    </p>
+                    
+                    <div class="btn-wrapper">
+                        <a href="{{ asset('images/Product_Services/Company-Brochure.pdf') }}" download class="btn-casa-download">
+                            Download Brochure
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
         
-    @include('pages.products-services.sections.cta')
+    <!-- @include('pages.products-services.sections.cta') -->
     
     @include('landing.sections.footer')
     

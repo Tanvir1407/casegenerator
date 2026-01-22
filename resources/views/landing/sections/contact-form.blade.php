@@ -27,10 +27,14 @@
                     <div class="form-row">
                         <input type="tel" name="phone" placeholder="Phone" value="{{ old('phone') }}">
                         <select name="industry" class="form-select" required>
-                            <option value="" disabled {{ old('industry') ? '' : 'selected' }}>Select your industry</option>
-                            <option value="industry_one" {{ old('industry') == 'industry_one' ? 'selected' : '' }}>Industry One</option>
-                            <option value="industry_two" {{ old('industry') == 'industry_two' ? 'selected' : '' }}>Industry Two</option>
-                            <option value="industry_four" {{ old('industry') == 'industry_four' ? 'selected' : '' }}>Industry Four</option>
+                            <option value="" disabled {{ old('industry') ? '' : 'selected' }}>Select Your Industry</option>
+                            <option value="Construction" {{ old('industry') == 'Construction' ? 'selected' : '' }}>Construction</option>
+                            <option value="Manufacturing" {{ old('industry') == 'Manufacturing' ? 'selected' : '' }}>Manufacturing</option>
+                            <option value="Healthcare" {{ old('industry') == 'Healthcare' ? 'selected' : '' }}>Healthcare</option>
+                            <option value="Hospitality" {{ old('industry') == 'Hospitality' ? 'selected' : '' }}>Hospitality</option>
+                            <option value="Residential" {{ old('industry') == 'Residential' ? 'selected' : '' }}>Residential</option>
+                            <option value="Commercial" {{ old('industry') == 'Commercial' ? 'selected' : '' }}>Commercial</option>
+                            <option value="Other" {{ old('industry') == 'Other' ? 'selected' : '' }}>Other</option>
                         </select>
                     </div>
                     <div class="form-row">

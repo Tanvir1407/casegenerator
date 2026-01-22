@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class QuoteRequestController extends Controller
 {
+    public function index()
+    {
+        return view('pages.quote');
+    }
+
     public function submit(Request $request)
     {
         $validated = $request->validate([

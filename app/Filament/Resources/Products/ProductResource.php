@@ -71,6 +71,10 @@ class ProductResource extends Resource
                         ->maxLength(255)
                         ->unique('products', 'slug', ignoreRecord: true),
 
+                    TextInput::make('model_code')
+                        ->label('Model Code')
+                        ->maxLength(255),
+
                     Select::make('category')
                         ->options([
                             'High Power' => 'High Power',
@@ -93,10 +97,7 @@ class ProductResource extends Resource
                         ->placeholder('e.g., 1000 kVA - 5000 kVA')
                         ->maxLength(255),
 
-                    TextInput::make('price')
-                        ->numeric()
-                        ->prefix('$')
-                        ->placeholder('0.00'),
+
                     Textarea::make('short_description')
                         ->label('Short Description')
                         ->rows(3)
@@ -107,16 +108,7 @@ class ProductResource extends Resource
                 ])
                 ->columns(2),
 
-            Section::make('Detailed Description')
-                ->schema([
-                    RichEditor::make('description')
-                        ->required()
-                        ->columnSpanFull()
-                        ->fileAttachmentsDirectory('products/content')
-                        ->fileAttachmentsVisibility('public')
-                        ->helperText('Use the rich editor to add detailed product information. You can insert images directly into the content.'),
-                ])
-                ->collapsible(),
+
 
             Section::make('Images')
                 ->schema([
@@ -207,17 +199,30 @@ class ProductResource extends Resource
                                 ->relationship('controller', 'type')
                                 ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->brand} - {$record->type}")
                                 ->searchable()
-                                ->preload(),
+                                ->preload()
+                                ->createOptionForm([
+                                    TextInput::make('brand')->required(),
+                                    TextInput::make('type')->required(),
+                                ]),
                             Select::make('engine_id')
                                 ->relationship('engine', 'model')
                                 ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->brand} - {$record->model}")
                                 ->searchable()
-                                ->preload(),
+                                ->preload()
+                                ->createOptionForm([
+                                    TextInput::make('brand')->required(),
+                                    TextInput::make('model')->required(),
+                                ]),
                             Select::make('alternator_id')
                                 ->relationship('alternator', 'model')
                                 ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->brand} - {$record->model}")
                                 ->searchable()
-                                ->preload(),
+                                ->preload()
+                                ->createOptionForm([
+                                    TextInput::make('brand')->required(),
+                                    TextInput::make('model')->required(),
+                                    TextInput::make('type'),
+                                ]),
                         ]),
 
                     Fieldset::make('Power & Performance')
@@ -225,8 +230,14 @@ class ProductResource extends Resource
                             TextInput::make('prime_power_kva')
                                 ->label('Prime Power (kVA)')
                                 ->numeric(),
+                            TextInput::make('prime_power_kw')
+                                ->label('Prime Power (kW)')
+                                ->numeric(),
                             TextInput::make('standby_power_kva')
                                 ->label('Standby Power (kVA)')
+                                ->numeric(),
+                            TextInput::make('standby_power_kw')
+                                ->label('Standby Power (kW)')
                                 ->numeric(),
                             TextInput::make('fuel_consumption_100_percent')
                                 ->label('Fuel Cons. 100% (L/h)')
@@ -237,7 +248,7 @@ class ProductResource extends Resource
                             TextInput::make('noise_level_db')
                                 ->label('Noise Level (dB)')
                                 ->numeric(),
-                        ])->columns(3),
+                        ])->columns(4),
 
                     Fieldset::make('Dimensions & Weight')
                         ->schema([
@@ -246,6 +257,64 @@ class ProductResource extends Resource
                             TextInput::make('height_mm')->label('Height (mm)')->numeric(),
                             TextInput::make('weight_kg')->label('Weight (kg)')->numeric(),
                         ])->columns(4),
+
+                    Section::make('Deep Technical Specifications')
+                        ->statePath('technical_specifications')
+                        ->schema([
+                            Fieldset::make('General')
+                                ->statePath('general')
+                                ->schema([
+                                    TextInput::make('frequency')->label('Frequency'),
+                                    TextInput::make('emissions_level')->label('Emissions Level'),
+                                    TextInput::make('insulation_class')->label('Insulation Class'),
+                                    TextInput::make('protection_class')->label('Protection Class'),
+                                ])->columns(2),
+                            
+                            Fieldset::make('Engine Details')
+                                ->statePath('engine_details')
+                                ->schema([
+                                    TextInput::make('cylinders')->label('Cylinders')->numeric(),
+                                    TextInput::make('aspiration')->label('Aspiration'),
+                                    TextInput::make('cooling_system')->label('Cooling System'),
+                                    TextInput::make('governor_type')->label('Governor Type'),
+                                    TextInput::make('compression_ratio')->label('Compression Ratio'),
+                                    TextInput::make('displacement')->label('Displacement'),
+                                ])->columns(3),
+
+                            Fieldset::make('Fuel Consumption (L/h)')
+                                ->statePath('fuel_consumption_l_h')
+                                ->schema([
+                                    TextInput::make('50_percent_load')->label('50% Load')->numeric(),
+                                    TextInput::make('75_percent_load')->label('75% Load')->numeric(),
+                                    TextInput::make('100_percent_load')->label('100% Load')->numeric(),
+                                    TextInput::make('standby_load')->label('Standby Load')->numeric(),
+                                ])->columns(4),
+                            
+                            Fieldset::make('Dimensions & Weight (Detailed)')
+                                ->statePath('dimensions_and_weight')
+                                ->schema([
+                                    TextInput::make('length_mm')->label('Length (mm)')->numeric(),
+                                    TextInput::make('width_mm')->label('Width (mm)')->numeric(),
+                                    TextInput::make('height_mm')->label('Height (mm)')->numeric(),
+                                    TextInput::make('weight_kg')->label('Weight (kg)')->numeric(),
+                                    TextInput::make('fuel_tank_capacity_liters')->label('Fuel Tank (L)')->numeric(),
+                                ])->columns(5),
+
+                            Fieldset::make('Noise Level')
+                                ->statePath('noise_level')
+                                ->schema([
+                                    TextInput::make('db_at_7m')->label('dB @ 7m')->numeric(),
+                                    TextInput::make('sound_pressure_level')->label('Sound Pressure Level')->numeric(),
+                                ])->columns(2),
+
+                            Fieldset::make('Battery')
+                                ->statePath('battery')
+                                ->schema([
+                                    TextInput::make('voltage')->label('Voltage'),
+                                    TextInput::make('capacity')->label('Capacity'),
+                                ])->columns(2),
+                        ])
+                        ->collapsible(),
                 ]),
 
             Section::make('Features')
@@ -278,12 +347,6 @@ class ProductResource extends Resource
                                 ])
                                 ->default('draft')
                                 ->required(),
-
-                            TextInput::make('sort_order')
-                                ->label('Sort Order')
-                                ->numeric()
-                                ->default(0)
-                                ->helperText('Lower numbers appear first'),
                         ])
                 ])
                 ->collapsible(),
@@ -296,92 +359,170 @@ class ProductResource extends Resource
     public static function infolist(Schema $schema): Schema
     {
         return $schema
+            ->columns(1)
             ->schema([
+                // Header: Basic Info
                 Section::make('Basic Information')
                     ->schema([
-                        Grid::make([
-                            'default' => 1,
-                            'md' => 3,
-                        ])
+                        Grid::make(3)
                             ->schema([
                                 TextEntry::make('title')
-                                // ->size(\Filament\Infolists\Components\TextEntry\TextEntrySize::Large)
-                                ->weight(\Filament\Support\Enums\FontWeight::Bold),
-                                
+                                    ->label('Product Title')
+                                    ->weight(\Filament\Support\Enums\FontWeight::Bold)
+                                    ->size('lg')
+                                    ->columnSpan(2),
                                 TextEntry::make('status')
                                     ->badge()
                                     ->colors([
                                         'danger' => 'draft',
                                         'success' => 'published',
                                     ]),
-
+                            ]),
+                        Grid::make(3)
+                            ->schema([
+                                TextEntry::make('model_code')->label('Model Code'),
+                                TextEntry::make('category')->label('Category')->badge(),
                                 TextEntry::make('is_featured')
                                     ->label('Featured')
                                     ->icon(fn (bool $state): string => $state ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle')
                                     ->color(fn (bool $state): string => $state ? 'success' : 'gray'),
                             ]),
-                    ]),
-                
-                Section::make('Description')
-                    ->schema([
-                        TextEntry::make('description')
+                        TextEntry::make('short_description')
+                            ->label('Short Description')
                             ->prose()
-                            ->markdown()
-                            ->hiddenLabel(),
+                            ->columnSpanFull(),
                     ]),
 
+                // Power & Configuration
+                Section::make('Power & Configuration')
+                    ->schema([
+                         Grid::make(4)
+                            ->schema([
+                                TextEntry::make('prime_power_kva')->label('Prime (kVA)'),
+                                TextEntry::make('prime_power_kw')->label('Prime (kW)'),
+                                TextEntry::make('standby_power_kva')->label('Standby (kVA)'),
+                                TextEntry::make('standby_power_kw')->label('Standby (kW)'),
+                                TextEntry::make('voltage')->label('Voltage'),
+                                TextEntry::make('phases')->label('Phase'),
+                                TextEntry::make('fuel')->label('Fuel Type'),
+                                TextEntry::make('frequency')->label('Frequency'),
+                            ])
+                    ]),
+
+                 // Components (Relationships)
+                Section::make('Components')
+                    ->schema([
+                        Grid::make(4)
+                            ->schema([
+                                TextEntry::make('generatorType.name')->label('Generator Type'),
+                                TextEntry::make('engine.model')
+                                    ->label('Engine')
+                                    ->formatStateUsing(fn ($record) => $record->engine ? "{$record->engine->brand} - {$record->engine->model}" : '-'),
+                                TextEntry::make('alternator.model')
+                                    ->label('Alternator')
+                                    ->formatStateUsing(fn ($record) => $record->alternator ? "{$record->alternator->brand} - {$record->alternator->model}" : '-'),
+                                TextEntry::make('controller.type')
+                                    ->label('Controller')
+                                    ->formatStateUsing(fn ($record) => $record->controller ? "{$record->controller->brand} - {$record->controller->type}" : '-'),
+                            ])
+                    ]),
+
+                // Technical Specifications (JSON)
+                Section::make('Technical Specifications')
+                    ->schema([
+                         // General
+                         Section::make('General')
+                            ->schema([
+                                Grid::make(4)
+                                    ->schema([
+                                         TextEntry::make('technical_specifications.general.frequency')->label('Frequency'),
+                                         TextEntry::make('technical_specifications.general.emissions_level')->label('Emissions'),
+                                         TextEntry::make('technical_specifications.general.insulation_class')->label('Insulation'),
+                                         TextEntry::make('technical_specifications.general.protection_class')->label('Protection'),
+                                    ])
+                            ])->compact(),
+                        
+                        // Engine Details
+                        Section::make('Engine Details')
+                            ->schema([
+                                Grid::make(3)
+                                    ->schema([
+                                        TextEntry::make('technical_specifications.engine_details.cylinders')->label('Cylinders'),
+                                        TextEntry::make('technical_specifications.engine_details.aspiration')->label('Aspiration'),
+                                        TextEntry::make('technical_specifications.engine_details.cooling_system')->label('Cooling'),
+                                        TextEntry::make('technical_specifications.engine_details.governor_type')->label('Governor'),
+                                        TextEntry::make('technical_specifications.engine_details.compression_ratio')->label('Compression'),
+                                        TextEntry::make('technical_specifications.engine_details.displacement')->label('Displacement'),
+                                    ])
+                            ])->compact(),
+
+                         // Fuel Consumption
+                        Section::make('Fuel Consumption (L/h)')
+                            ->schema([
+                                Grid::make(4)
+                                    ->schema([
+                                        TextEntry::make('technical_specifications.fuel_consumption_l_h.50_percent_load')->label('50% Load'),
+                                        TextEntry::make('technical_specifications.fuel_consumption_l_h.75_percent_load')->label('75% Load'),
+                                        TextEntry::make('technical_specifications.fuel_consumption_l_h.100_percent_load')->label('100% Load'),
+                                        TextEntry::make('technical_specifications.fuel_consumption_l_h.standby_load')->label('Standby Load'),
+                                    ])
+                            ])->compact(),
+
+                         // Dimensions & Weight
+                        Section::make('Dimensions & Weight')
+                            ->schema([
+                                Grid::make(5)
+                                    ->schema([
+                                        TextEntry::make('technical_specifications.dimensions_and_weight.length_mm')->label('Length (mm)'),
+                                        TextEntry::make('technical_specifications.dimensions_and_weight.width_mm')->label('Width (mm)'),
+                                        TextEntry::make('technical_specifications.dimensions_and_weight.height_mm')->label('Height (mm)'),
+                                        TextEntry::make('technical_specifications.dimensions_and_weight.weight_kg')->label('Weight (kg)'),
+                                        TextEntry::make('technical_specifications.dimensions_and_weight.fuel_tank_capacity_liters')->label('Fuel Tank (L)'),
+                                    ])
+                            ])->compact(),
+                        
+                         // Noise & Battery
+                        Section::make('Noise & Battery')
+                            ->schema([
+                                Grid::make(4)
+                                    ->schema([
+                                        TextEntry::make('technical_specifications.noise_level.db_at_7m')->label('Noise (dB @ 7m)'),
+                                        TextEntry::make('technical_specifications.noise_level.sound_pressure_level')->label('Sound Pressure'),
+                                        TextEntry::make('technical_specifications.battery.voltage')->label('Battery Voltage'),
+                                        TextEntry::make('technical_specifications.battery.capacity')->label('Battery Capacity'),
+                                    ])
+                            ])->compact(),
+                    ])->collapsible(),
+
+                // Features
+                Section::make('Features')
+                    ->schema([
+                        RepeatableEntry::make('features')
+                            ->hiddenLabel()
+                            ->schema([
+                                TextEntry::make('feature')
+                                    ->hiddenLabel()
+                                    ->icon('heroicon-m-check-circle')
+                                    ->color('success'),
+                            ])
+                            ->grid(1),
+                    ]),
+
+                // Gallery
                 Section::make('Gallery')
                     ->schema([
                         ImageEntry::make('gallery_images')
                             ->hiddenLabel()
                             ->disk('public')
-                            ->height(200)
+                            ->size(200)
                             ->extraImgAttributes([
                                 'class' => 'rounded-lg shadow-md object-cover',
                             ]),
                     ])
                     ->visible(fn ($record) => !empty($record->gallery_images)),
+            ]);
 
-                Section::make('Technical Specifications & Features')
-                ->schema([
-                    Grid::make(2)
-                        ->schema([
-                            // Left Side: Specifications
-                            RepeatableEntry::make('specifications')
-                                ->label('Technical Specifications')
-                                ->contained(false)
-                                ->schema([
-                                    Grid::make(2)
-                                        ->schema([
-                                            TextEntry::make('spec_name')
-                                                ->hiddenLabel()
-                                                ->weight(\Filament\Support\Enums\FontWeight::Bold),
-                                            
-                                            TextEntry::make('spec_value')
-                                                ->hiddenLabel()
-                                                ->alignRight(), 
-                                        ])
-                                        ->extraAttributes([
-                                            'class' => 'border-b border-gray-100 dark:border-gray-800 py-2 last:border-0'
-                                        ]),
-                                ]),
 
-                            // Right Side: Features
-                            RepeatableEntry::make('features')
-                                ->label('Key Features')
-                                ->contained(false)
-                                ->schema([
-                                    TextEntry::make('feature')
-                                        ->hiddenLabel()
-                                        ->icon('heroicon-m-check-circle')
-                                        ->color('success')
-                                        ->extraAttributes(['class' => 'py-1']),
-                                ]),
-                        ]),
-                ])
-                ->columnSpanFull()
-            ])
-            ->columns(1);
     }
 
     /* ===================== TABLE ===================== */
@@ -395,12 +536,22 @@ class ProductResource extends Resource
                     ->size(60)
                     ->square(),
                 
+                TextColumn::make('model_code')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable()
                     ->limit(20)
                     ->wrap(),
                 
+                TextColumn::make('prime_power_kva')
+                    ->label('Prime (kVA)')
+                    ->numeric()
+                    ->sortable(),
+
                 TextColumn::make('category')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -413,9 +564,7 @@ class ProductResource extends Resource
                     })
                     ->sortable(),
                 
-                TextColumn::make('price')
-                    ->money('USD')
-                    ->sortable(),
+
                 
                 IconColumn::make('is_featured')
                     ->boolean()
@@ -436,9 +585,7 @@ class ProductResource extends Resource
                         'success' => 'published',
                     ]),
                 
-                TextColumn::make('sort_order')
-                    ->label('Order')
-                    ->sortable(),
+
                 
                 TextColumn::make('created_at')
                     ->dateTime()

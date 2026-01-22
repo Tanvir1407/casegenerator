@@ -96,3 +96,6 @@ Route::get('/debug-post/{slug}', function ($slug) {
 if (app()->environment('local', 'development')) {
     require __DIR__ . '/test.php';
 }
+
+// Quote page route
+Route::get('/quote', [QuoteRequestController::class, 'index'])->name('quote');

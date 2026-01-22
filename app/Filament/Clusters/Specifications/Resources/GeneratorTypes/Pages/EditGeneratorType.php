@@ -6,8 +6,12 @@ use App\Filament\Clusters\Specifications\Resources\GeneratorTypes\GeneratorTypeR
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
+use App\Filament\Clusters\Specifications\Traits\HasSpecificationsTabs;
+
 class EditGeneratorType extends EditRecord
 {
+    use HasSpecificationsTabs;
+
     protected static string $resource = GeneratorTypeResource::class;
 
     protected function getHeaderActions(): array

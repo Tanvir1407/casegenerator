@@ -1,16 +1,52 @@
 :root {
     --custom-sidebar-bg: #f3f4f6;
+    --custom-header-bg: #ffffff;
 }
 
 .dark {
+    /* Use a darker shade for the sidebar in dark mode, or allow it to be transparent/blend */
     --custom-sidebar-bg: #18181b;
-    /* Matches standard dark theme or slightly different */
+    /* Zinc-900 */
+    --custom-header-bg: #18181b;
 }
 
+/* Sidebar Customization */
 .fi-sidebar {
     background-color: var(--custom-sidebar-bg) !important;
+    border-right: 1px solid transparent;
 }
 
-.fi-sidebar-header {
+.dark .fi-sidebar {
     background-color: var(--custom-sidebar-bg) !important;
+    border-right-color: #27272a;
+    /* Zinc-800 */
+}
+
+/* Header/Topbar Customization */
+.fi-header {
+    background-color: var(--custom-header-bg) !important;
+}
+
+.fi-topbar {
+    background-color: var(--custom-header-bg);
+}
+
+.dark .fi-topbar {
+    background-color: var(--custom-header-bg);
+    border-bottom: 1px solid #27272a;
+}
+
+/* Ensure text contrast in sidebar if needed */
+.fi-sidebar-nav-item-label {
+    /* Filament handles this, but we can enforce if needed */
+}
+
+/* Fix for potential white backgrounds persisting in dark mode */
+.dark .fi-body {
+    background-color: #09090b;
+    /* Zinc-950 */
+}
+
+.dark .fi-main {
+    background-color: #09090b;
 }

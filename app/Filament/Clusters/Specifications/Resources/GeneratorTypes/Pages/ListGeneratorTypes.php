@@ -6,8 +6,12 @@ use App\Filament\Clusters\Specifications\Resources\GeneratorTypes\GeneratorTypeR
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
+use App\Filament\Clusters\Specifications\Traits\HasSpecificationsTabs;
+
 class ListGeneratorTypes extends ListRecords
 {
+    use HasSpecificationsTabs;
+
     protected static string $resource = GeneratorTypeResource::class;
 
     protected function getHeaderActions(): array

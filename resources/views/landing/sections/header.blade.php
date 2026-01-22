@@ -14,7 +14,7 @@
                 <li><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="{{ route('home') }}#contact-form" class="btn btn-primary">Request a Quote</a>
+                <a href="{{ route('quote') }}" class="btn btn-primary">Request a Quote</a>
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">
                     <span></span>
                     <span></span>

@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index(Request $request): View
     {
-        $query = Product::published()->ordered();
+        $query = Product::published()->orderBy('created_at', 'desc');
 
         // Filter by Fuel
         if ($request->has('fuel')) {
@@ -26,13 +26,23 @@ class ProductController extends Controller
             }
         }
 
-        // Filter by Frequency
+        // Filter by Frequency (check both direct field and JSON)
         if ($request->has('frequency')) {
              $frequency = $request->frequency;
              if (is_array($frequency)) {
-                 $query->whereIn('frequency', $frequency);
+                 $query->where(function($q) use ($frequency) {
+                     $q->whereIn('frequency', $frequency)
+                       ->orWhere(function($subQ) use ($frequency) {
+                           foreach ($frequency as $freq) {
+                               $subQ->orWhereJsonContains('technical_specifications->general->frequency', $freq);
+                           }
+                       });
+                 });
              } else {
-                 $query->where('frequency', $frequency);
+                 $query->where(function($q) use ($frequency) {
+                     $q->where('frequency', $frequency)
+                       ->orWhereJsonContains('technical_specifications->general->frequency', $frequency);
+                 });
              }
         }
 
@@ -46,13 +56,23 @@ class ProductController extends Controller
              }
         }
 
-        // Filter by Emissions
+        // Filter by Emissions (check both direct field and JSON)
         if ($request->has('emissions')) {
              $emissions = $request->emissions;
              if (is_array($emissions)) {
-                 $query->whereIn('emissions_rating', $emissions);
+                 $query->where(function($q) use ($emissions) {
+                     $q->whereIn('emissions_rating', $emissions)
+                       ->orWhere(function($subQ) use ($emissions) {
+                           foreach ($emissions as $emission) {
+                               $subQ->orWhereJsonContains('technical_specifications->general->emissions_level', $emission);
+                           }
+                       });
+                 });
              } else {
-                 $query->where('emissions_rating', $emissions);
+                 $query->where(function($q) use ($emissions) {
+                     $q->where('emissions_rating', $emissions)
+                       ->orWhereJsonContains('technical_specifications->general->emissions_level', $emissions);
+                 });
              }
         }
 
@@ -79,12 +99,39 @@ class ProductController extends Controller
         $products = $query->paginate(9)->withQueryString();
 
         // Get filter options (distinct values) to pass to view
-        $fuels = Product::published()->distinct()->whereNotNull('fuel')->pluck('fuel');
-        $frequencies = Product::published()->distinct()->whereNotNull('frequency')->pluck('frequency');
-        $voltages = Product::published()->distinct()->whereNotNull('voltage')->pluck('voltage');
-        $emissions = Product::published()->distinct()->whereNotNull('emissions_rating')->pluck('emissions_rating');
-        $versions = Product::published()->distinct()->whereNotNull('version')->pluck('version');
-        $engines = Product::published()->distinct()->whereNotNull('engine_brand')->pluck('engine_brand');
+        $fuels = Product::published()->distinct()->whereNotNull('fuel')->pluck('fuel')->filter()->unique()->sort()->values();
+        
+        // For frequency, check both direct field and technical_specifications
+        $frequencies = collect();
+        $directFrequencies = Product::published()->whereNotNull('frequency')->pluck('frequency');
+        $frequencies = $frequencies->merge($directFrequencies);
+        
+        // Also get from technical_specifications->general->frequency
+        $allProducts = Product::published()->whereNotNull('technical_specifications')->get();
+        foreach ($allProducts as $product) {
+            if (isset($product->technical_specifications['general']['frequency'])) {
+                $frequencies->push($product->technical_specifications['general']['frequency']);
+            }
+        }
+        $frequencies = $frequencies->filter()->unique()->sort()->values();
+        
+        $voltages = Product::published()->distinct()->whereNotNull('voltage')->pluck('voltage')->filter()->unique()->sort()->values();
+        
+        // For emissions, check both emissions_rating and technical_specifications
+        $emissions = collect();
+        $directEmissions = Product::published()->whereNotNull('emissions_rating')->pluck('emissions_rating');
+        $emissions = $emissions->merge($directEmissions);
+        
+        // Also get from technical_specifications->general->emissions_level
+        foreach ($allProducts as $product) {
+            if (isset($product->technical_specifications['general']['emissions_level'])) {
+                $emissions->push($product->technical_specifications['general']['emissions_level']);
+            }
+        }
+        $emissions = $emissions->filter()->unique()->sort()->values();
+        
+        $versions = Product::published()->distinct()->whereNotNull('version')->pluck('version')->filter()->unique()->sort()->values();
+        $engines = Product::published()->distinct()->whereNotNull('engine_brand')->pluck('engine_brand')->filter()->unique()->sort()->values();
 
         return view('pages.products.index', compact(
             'products', 
@@ -198,7 +245,7 @@ class ProductController extends Controller
     public function api()
     {
         return Product::published()
-            ->ordered()
+            ->orderBy('created_at', 'desc')
             ->select(['id', 'title', 'slug', 'short_description', 'category', 'featured_image', 'price'])
             ->get()
             ->map(function ($product) {

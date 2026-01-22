@@ -1,7 +1,7 @@
 <section class="hero-section" id="heroCarousel">
     <!-- Hero Slide 1 -->
     <div class="hero-slide active">
-        <div class="hero-bg-img" style="background-image: url('{{ asset('images/landing/Casablanca_Vission-1-1.png') }}');"></div>
+        <div class="hero-bg-img" style="background-image: url('{{ asset('images/landing/Dubai-Skyline.webp') }}');"></div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
@@ -22,7 +22,7 @@
 
     <!-- Hero Slide 2 -->
     <div class="hero-slide">
-        <div class="hero-bg-img" style="background-image: url('{{ asset('images/landing/img32.jpg') }}');"></div>
+        <div class="hero-bg-img" style="background-image: url('{{ asset('images/landing/image002.jpg') }}');"></div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
@@ -44,7 +44,7 @@
 
     <!-- Hero Slide 3 -->
     <div class="hero-slide">
-        <div class="hero-bg-img" style="background-image: url('{{ asset('images/landing/img72.jpg') }}');"></div>
+        <div class="hero-bg-img" style="background-image: url('{{ asset('images/landing/image001.jpg') }}');"></div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">

@@ -16,6 +16,7 @@ class Product extends Model
     protected $fillable = [
         'title',
         'slug',
+        'model_code',
         'description',
         'short_description',
         'category',
@@ -52,7 +53,10 @@ class Product extends Model
 
         // New Specification Data
         'prime_power_kva',
+        'prime_power_kw',
         'standby_power_kva',
+        'standby_power_kw',
+        'technical_specifications',
         'fuel_consumption_100_percent',
         'fuel_tank_capacity',
         'length_mm',
@@ -86,6 +90,7 @@ class Product extends Model
         'gallery_images' => 'array',
         'content_images' => 'array',
         'specifications' => 'array',
+        'technical_specifications' => 'array',
         'features' => 'array',
         'is_featured' => 'boolean',
         'price' => 'decimal:2',

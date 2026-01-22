@@ -47,7 +47,10 @@
 
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Quote Request</button>
+                    <div>
+                                            <button type="submit" class="btn btn-primary">Submit Quote Request</button>
+
+                    </div>
                 </form>
             </div>
 
@@ -55,21 +58,21 @@
                            <img src="{{ asset('images/Product_Services/2-3-1-1.png') }}" alt="Company Brochure" class="company-brochure">
 
                 <section class="faq-contact-section">
-    <div class="container">
-        <div class="faq-support-card">
-            <div class="support-content">
-                <h2 class="support-title">Dedicated Customer Teams & An Agile Services</h2>
-                <p class="support-text">Our worldwide presence ensures the timeliness, cost efficiency and compliance adherence required to ensure your production timelines are met.</p>
-            </div>
-            <div class="section-action">
-                <a href="{{ asset('images/Product_Services/Company-Brochure.pdf') }}" download class="btn btn-primary btn-large">
-                    Download Brochure
-                    <i class="fa-solid fa-download"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+                <div class="container">
+                    <div class="faq-support-card">
+                        <div class="support-content">
+                            <h2 class="support-title">Dedicated Customer Teams & An Agile Services</h2>
+                            <p class="support-text">Our worldwide presence ensures the timeliness, cost efficiency and compliance adherence required to ensure your production timelines are met.</p>
+                        </div>
+                        <div class="section-action">
+                            <a href="{{ asset('images/Product_Services/Company-Brochure.pdf') }}" download class="btn btn-primary btn-large">
+                                Download Brochure
+                                <i class="fa-solid fa-download"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </section>
 
 
                 {{-- <div class="map-container">

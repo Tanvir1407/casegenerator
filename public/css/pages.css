@@ -327,221 +327,183 @@
 .products-grid-modern {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 25px;
+    /* Single column for horizontal list */
+    gap: 30px;
     margin-top: 60px;
 }
+
+@media (min-width: 1400px) {
+    .products-grid-modern {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 
 .generator-card {
     display: grid;
     grid-template-columns: 40% 60%;
     background: white;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    /* Softer shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 280px;
+    /* Ensure sufficient height */
 }
 
-
+.generator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
 
 .card-image-section {
-
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    min-height: 350px;
-    overflow: hidden;
+    background-color: #64748b;
+    /* Flat Slate Gray */
+    padding: 25px;
+    /* Add padding inside image area */
 }
 
 .generator-card-header {
-    padding: 0;
     position: absolute;
+    top: 25px;
+    left: 25px;
     z-index: 10;
-    top: 44px;
-    left: 23px;
-    width: auto;
 }
 
 .emergency-balance-badge {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
     color: white;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    display: inline-block;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* No background/border for the brand name in screenshot, just text */
+    background: transparent;
+    border: none;
+    padding: 0;
 }
 
 .generator-image {
-    position: relative;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
-    width: 100%;
-    height: 100%;
-}
-
-.generator-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    /* padding: 30px 20px; */
-    transition: transform 0.4s ease, filter 0.4s ease;
-}
-
-.generator-card:hover .generator-image img {
-    transform: scale(1.08);
-    filter: brightness(1.1);
+    padding: 10px;
 }
 
 .card-badges {
     position: absolute;
-    bottom: 45px;
-    left: 25%;
-    transform: translateX(-50%);
+    bottom: 25px;
+    left: 25px;
+    /* transform: translateX(0); REMOVE centering */
     display: flex;
     gap: 10px;
-    justify-content: center;
     z-index: 10;
 }
 
 .freq-badge,
 .phase-badge {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    color: white;
-    font-size: 10px;
-    font-weight: 700;
+    background: white;
+    /* White pill */
+    color: #1f2937;
+    /* Dark text */
+    font-size: 11px;
+    font-weight: 800;
     padding: 6px 14px;
     border-radius: 20px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
 }
 
 .card-specs-section {
-    padding: 35px 30px;
+    padding: 30px 40px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    /* Center content vertically */
     background: white;
 }
 
 .generator-model {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 800;
-    color: #001b44;
+    color: #002b49;
+    /* Dark blue */
     margin-bottom: 25px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    line-height: 1.2;
 }
 
 .specs-content {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 24px;
 }
 
 .spec-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.spec-row {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
 .spec-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    color: #666;
+    color: #64748b;
+    /* Muted text */
     text-transform: uppercase;
-    letter-spacing: 0.5px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
 }
 
-.power-specs {
+.spec-label i {
+    font-size: 11px;
+    width: 24px;
+    height: 24px;
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 50%;
+    color: #94a3b8;
 }
 
 .power-line {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
-    color: #001b44;
-    display: inline-block;
+    color: #002b49;
+    /* Dark text */
+    display: block;
+    /* Stack lines */
+    line-height: 1.6;
 }
 
 .specs-row-inline {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 40px;
+    margin-top: 5px;
 }
 
 .spec-value {
     font-size: 14px;
     font-weight: 700;
-    color: #001b44;
+    color: #002b49;
+    display: block;
+    margin-top: 4px;
 }
 
 .generator-actions {
-    margin-top: auto;
-}
-
-.download-btn {
-    background: transparent;
-    border: none;
-    color: #3b82f6;
-    text-decoration: none;
-    padding: 0;
-    border-radius: 0;
-    font-size: 14px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-    text-transform: capitalize;
-    letter-spacing: 0;
-    cursor: pointer;
-}
-
-.download-btn:hover {
-    color: #1e3a8a;
-    text-decoration: none;
-    transform: translateX(5px);
-}
-
-.download-btn i {
-    font-size: 16px;
-    background: var(--primary-color);
-    color: white;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease;
-}
-
-.download-btn:hover i {
-    background: var(--primary-hover);
+    display: none;
+    /* Hide download button as per screenshot */
 }
 
 /* Responsive Design */
