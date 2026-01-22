@@ -185,7 +185,7 @@ class ProductResource extends Resource
                         ->schema([
                             Select::make('generator_type_id')
                                 ->relationship('generatorType', 'name')
-                                // ->searchable()
+                                ->searchable()
                                 ->preload()
                                 ->createOptionForm([
                                     TextInput::make('name')->required(),
@@ -194,7 +194,7 @@ class ProductResource extends Resource
                             Select::make('controller_id')
                                 ->relationship('controller', 'type')
                                 ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->brand} - {$record->type}")
-                                // ->searchable()
+                                ->searchable()
                                 ->preload()
                                 ->createOptionForm([
                                     TextInput::make('brand')->required(),
@@ -203,7 +203,7 @@ class ProductResource extends Resource
                             Select::make('engine_id')
                                 ->relationship('engine', 'model')
                                 ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->brand} - {$record->model}")
-                                // ->searchable()
+                                ->searchable()
                                 ->preload()
                                 ->createOptionForm([
                                     TextInput::make('brand')->required(),
@@ -212,7 +212,7 @@ class ProductResource extends Resource
                             Select::make('alternator_id')
                                 ->relationship('alternator', 'model')
                                 ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->brand} - {$record->model}")
-                                //->searchable()  
+                                ->searchable()  
                                 ->preload()
                                 ->createOptionForm([
                                     TextInput::make('brand')->required(),

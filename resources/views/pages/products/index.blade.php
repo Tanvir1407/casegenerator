@@ -156,7 +156,7 @@
             <div class="product-card-horizontal">
                 
                 <!-- Left Side: Image Section (40%) -->
-                <div class="card-image-section">
+                <div class="product-card-image-section">
                     
                     <!-- Product Image -->
                     <a href="{{ route('products.show', $product) }}" class="product-image-link">

@@ -100,7 +100,7 @@
                    </div>
                     <!-- Buttons -->
                     <div class="product-actions">
-                        <a href="{{ route('quote') }}" class="btn-primary">Request a Quote</a>
+                        <a href="{{ route('quote') }}" class="btn btn-primary">Request a Quote</a>
                         @if($product->hasPdfFile())
                         <a href="{{ route('products.download-pdf', $product) }}" class="btn-secondary">
                             <i class="fas fa-file-pdf"></i> Download Datasheet
