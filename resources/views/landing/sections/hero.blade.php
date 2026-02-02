@@ -1,7 +1,7 @@
 <section class="hero-section" id="heroCarousel">
     <!-- Hero Slide 1 -->
     <div class="hero-slide active">
-        <div class="hero-bg-img" style="background-image: url('{{ asset('images/landing/Dubai-Skyline.webp') }}');"></div>
+        <div class="hero-bg-img" style="background-image: url('{{ asset('images/landing/Dubai-Skyline.jpg') }}');"></div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
