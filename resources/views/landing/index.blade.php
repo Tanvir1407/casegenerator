@@ -9,13 +9,13 @@
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:title" content="Best power generators Dubai - Electrical generators" />
     <meta property="og:description" content="best power generators Dubai, generator service, generator uae, generator" />
-    <meta property="og:image" content="{{ asset('images/A4-v1-scaled.jpg') }}" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="https://casagenerators.com/images/A4-v1-724x1024.jpg" />
+    <meta property="og:image:width" content="724" />
+    <meta property="og:image:height" content="1024" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Best power generators Dubai - Electrical generators" />
     <meta name="twitter:description" content="best power generators Dubai, generator service, generator uae, generator" />
-    <meta name="twitter:image" content="{{ asset('images/A4-v1-scaled.jpg') }}" />
+    <meta name="twitter:image" content="https://casagenerators.com/images/A4-v1-724x1024.jpg" />
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/logo/Casagenerators Logo (1).png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/logo/Casagenerators Logo (1).png') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/logo/Casagenerators Logo (1).png') }}">
